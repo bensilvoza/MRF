@@ -28,7 +28,7 @@ app.use(
 //DATABASE
 
 // production DB
-mongoose.connect('mongodb+srv://Ben:RfEUdkYg$M4B*Q7@mrftestingdb.zjwt5.mongodb.net/mrftestingDB?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://Ben:RfEUdkYg$M4B*Q7@mrftestingdb.zjwt5.mongodb.net/mrftestingDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true} );
 
 
 // local DB
