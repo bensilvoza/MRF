@@ -26,7 +26,14 @@ app.use(
 );
 
 //DATABASE
-mongoose.connect('mongodb://localhost/mrftestingDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// production DB
+mongoose.connect('mongodb+srv://Ben:RfEUdkYg$M4B*Q7@mrftestingdb.zjwt5.mongodb.net/mrftestingDB?retryWrites=true&w=majority');
+
+
+// local DB
+//mongoose.connect('mongodb://localhost/mrftestingDB');
+
 
 //notes for database
 //embedding data - inserting entire content
