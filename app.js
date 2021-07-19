@@ -146,9 +146,9 @@ app.get('/login', function (req, res) {
 //Nested in login page
 //Administrator section
 app.post('/administrator', function (req, res) {
-	var key = 'hijocorporationzxcbnm@';
+	var key = 'h104i105j106o111c99o111r114p112o111r114a97t116i105o111n110z122x120c99b98n110m109z122z122k107y121q113q113@64s115j106@64!33*42%37';
 
-	if (req.body.key === key) {
+	if (hashing(req.body.key) === key) {
 		req.session.officialOpen = true;
 		res.redirect('/official');
 	} else {
@@ -573,7 +573,7 @@ app.post('/requestor-create', function (req, res) {
 			// nodemailer
 			// nodemailer starts here
 			var controlNumber = generateID;
-			var url = 'https://mrf-ixndk.run-us-west2.goorm.io/bu-id/' + controlNumber;
+			var url = 'https://tranquil-atoll-99479.herokuapp.com/bu-id/' + controlNumber;
 
 			var transporter = nodemailer.createTransport({
 				service: 'gmail',
@@ -978,9 +978,9 @@ app.put('/bu-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.buApproval === "Approve"){
-					url = 'https://mrf-ixndk.run-us-west2.goorm.io/hr-id/' + controlNumber;
+					url = 'https://tranquil-atoll-99479.herokuapp.com/hr-id/' + controlNumber;
 				} else {
-					url = 'https://mrf-ixndk.run-us-west2.goorm.io/requestor-id/' + controlNumber;
+					url = 'https://tranquil-atoll-99479.herokuapp.com/requestor-id/' + controlNumber;
 				}
 				
 				
@@ -1238,9 +1238,9 @@ app.put('/hr-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.hrApproval === "Approve"){
-					url = 'https://mrf-ixndk.run-us-west2.goorm.io/ceo-id/' + controlNumber;
+					url = 'https://tranquil-atoll-99479.herokuapp.com/ceo-id/' + controlNumber;
 				} else {
-					url = 'https://mrf-ixndk.run-us-west2.goorm.io/';
+					url = 'https://tranquil-atoll-99479.herokuapp.com/';
 				}
 				
 				
@@ -1526,7 +1526,7 @@ app.put('/ceo-id/:id', function (req, res) {
 
 				// nodemailer starts here
 				var controlNumber = paramsUrl;
-				var url = 'https://mrf-ixndk.run-us-west2.goorm.io/';
+				var url = 'https://tranquil-atoll-99479.herokuapp.com/';
 
 				var transporter = nodemailer.createTransport({
 					service: 'gmail',
