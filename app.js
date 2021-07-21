@@ -442,7 +442,34 @@ app.get('/requestor-create', function (req, res) {
 });
 
 app.post('/requestor-create', function (req, res) {
+	
 	var requiredFields = false;
+	
+	
+	
+	// tools needed
+	var toolsNeeded = ""
+	
+	//
+	if (req.body.ppe !== undefined) toolsNeeded = toolsNeeded + req.body.ppe + ", "
+	
+	if (req.body.laptop !== undefined) toolsNeeded = toolsNeeded + req.body.laptop + ", "
+	
+	if (req.body.desktop !== undefined) toolsNeeded = toolsNeeded + req.body.desktop + ", "
+	
+	if (req.body.office !== undefined) toolsNeeded = toolsNeeded + req.body.office
+	
+	//
+	var removeComma = ""
+	if (toolsNeeded[toolsNeeded.length - 2] === ","){
+		for (var i = 0; i < toolsNeeded.length - 2; i++){
+			 removeComma = removeComma + toolsNeeded[i]
+		}
+		
+		toolsNeeded = removeComma
+	}
+	
+	
 
 	//requestor input
 	var requestorInput = {
@@ -451,7 +478,7 @@ app.post('/requestor-create', function (req, res) {
 		sectionDepartment: req.body.sectionDepartment,
 		positionTitle: req.body.positionTitle,
 		placeAssignment: req.body.placeAssignment,
-		tools: req.body.tools,
+		tools: toolsNeeded,
 		descriptionJob: req.body.descriptionJob,
 		educationalDegree: req.body.educationalDegree,
 		specificCharacteristic: req.body.specificCharacteristic,
@@ -459,7 +486,7 @@ app.post('/requestor-create', function (req, res) {
 		typeRequest: req.body.typeRequest,
 		remarks: req.body.remarks,
 	};
-
+return res.send(requestorInput)
 	//all fields are required (except remarks)
 	var empty = '';
 	if (req.body.buLeadName === empty) {
@@ -537,6 +564,13 @@ app.post('/requestor-create', function (req, res) {
 		];
 
 		var date = months[month - 1] + ' ' + day + ', ' + year;
+		
+		
+		// Date
+		var currentDate = new Date();
+        var date = new Intl.DateTimeFormat('en-US', { dateStyle: 'full'}).format(currentDate);
+		
+		
 
 		//ID
 		var generateID = iid();
