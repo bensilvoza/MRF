@@ -486,7 +486,7 @@ app.post('/requestor-create', function (req, res) {
 		typeRequest: req.body.typeRequest,
 		remarks: req.body.remarks,
 	};
-return res.send(requestorInput)
+
 	//all fields are required (except remarks)
 	var empty = '';
 	if (req.body.buLeadName === empty) {
