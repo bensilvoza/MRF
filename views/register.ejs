@@ -57,10 +57,12 @@
 
 			<!-- <h2 class="mt-5 text-center">Manpower Requisition Form</h2> -->
 
+			<% if ( !(hideCreateMessage) ){ %>
 			<h2 class="mt-5 text-center">Create Account</h2>
 			<p class="text-center">
 				Create account and approved request.
 			</p>
+			<% } %>
 
 			<div class="container">
 				<div class="row justify-content-center">
@@ -107,6 +109,7 @@
 						<% } %>
 						<!-- End of session for weak password -->
 
+						<% if ( !(hideCreateMessage) ){ %>
 						<form action="/register" method="post" autocomplete="off">
 							<div class="form-group">
 								<input
@@ -140,6 +143,14 @@
 								</button>
 							</div>
 						</form>
+						<% } %>
+						
+						<% if ( hideCreateMessage ){ %>
+					    <div class="d-grid">
+							<a href="/login" class="mt-2 btn btn-lg btn-secondary" role="button">Go to Login</a>
+						</div>
+						<% } %>
+						
 					</div>
 				</div>
 			</div>

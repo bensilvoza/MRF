@@ -312,6 +312,18 @@ app.get('/register', function (req, res) {
 	req.session.accountHelper = undefined;
 
 	//spacing ...
+	
+	// session for hiding create message
+	if (req.session.hideCreateMessageHelper === true){
+		req.session.hideCreateMessage = true
+	} else {
+		req.session.hideCreateMessage = false
+	}
+	
+	// update the session, target the helper
+	req.session.hideCreateMessageHelper = undefined
+	
+	//spacing ...
 
 	//Session for incorrect details
 	if (req.session.incorrectDetailsFaker === true) {
@@ -339,6 +351,7 @@ app.get('/register', function (req, res) {
 		incorrectDetails: req.session.incorrectDetails,
 		account: req.session.account,
 		weakPassword: req.session.weakPassword,
+		hideCreateMessage: req.session.hideCreateMessage
 	});
 });
 
@@ -398,6 +411,9 @@ app.post('/register', function (req, res) {
 			if (error) return res.send('Something went wrong');
 
 			req.session.accountHelper = true;
+			
+			req.session.hideCreateMessageHelper = true;
+			
 			res.redirect('back');
 		});
 	});
