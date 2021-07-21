@@ -543,27 +543,27 @@ app.post('/requestor-create', function (req, res) {
 		}
 
 		//pull up date now
-		var currentDate = new Date();
-		var month = currentDate.getMonth() + 1;
-		var day = currentDate.getDate();
-		var year = currentDate.getFullYear();
+		// var currentDate = new Date();
+		// var month = currentDate.getMonth() + 1;
+		// var day = currentDate.getDate();
+		// var year = currentDate.getFullYear();
 
-		var months = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
+		// var months = [
+		// 	'January',
+		// 	'February',
+		// 	'March',
+		// 	'April',
+		// 	'May',
+		// 	'June',
+		// 	'July',
+		// 	'August',
+		// 	'September',
+		// 	'October',
+		// 	'November',
+		// 	'December',
+		// ];
 
-		var date = months[month - 1] + ' ' + day + ', ' + year;
+		// var date = months[month - 1] + ' ' + day + ', ' + year;
 		
 		
 		// Date

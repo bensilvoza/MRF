@@ -195,7 +195,7 @@
 			<% for (var requestorData of requestorDataAll){ %>
 			
 			
-			<div class="row d-flex justify-content-center mt-1 requestor-all-hover" onclick="location.href='/requestor-id/<%= requestorData["ID"] %>'" style="cursor: pointer;">
+			<div class="row d-flex justify-content-end mt-1 requestor-all-hover" onclick="location.href='/requestor-id/<%= requestorData["ID"] %>'" style="cursor: pointer;">
 				
 				<div class="col-md-2 p-0">
 					<p>
@@ -209,8 +209,8 @@
 					</p>
 				</div>
 				
-				<div class="col-md-2 text-center">
-					<p style="text-align: end;">
+				<div class="col-md-3 text-center">
+					<p>
 						<%= requestorData["Date Requested"] %>
 					</p>
 				</div>
