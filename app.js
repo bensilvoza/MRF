@@ -1050,7 +1050,7 @@ app.put('/bu-id/:id', function (req, res) {
 						to: requestorEmailDeclined,
 						subject: 'REQUEST DECLINED',
 						html:
-							'<p>Manpower request is declined, <br> Control number: ' +
+							'<p>Manpower request was declined, <br> Control number: ' +
 							controlNumber +
 							' <br><br><br> Visit the link <a href=' +
 							url +
@@ -1314,7 +1314,7 @@ app.put('/hr-id/:id', function (req, res) {
 						to: declinedEmails,
 						subject: 'REQUEST DECLINED',
 						html:
-							'<p>Manpower request is declined, <br> Control number: ' +
+							'<p>Manpower request was declined, <br> Control number: ' +
 							controlNumber +
 							' <br><br><br> Visit the link <a href=' +
 							url +
@@ -1591,7 +1591,7 @@ app.put('/ceo-id/:id', function (req, res) {
 					to: receivingEmails,
 					subject: eSubject,
 					html:
-						'<p>Manpower request is ' +
+						'<p>Manpower request ' +
 						eBody +
 						', <br> Control number: ' +
 						controlNumber +
