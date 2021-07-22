@@ -33,30 +33,28 @@
 		<div class="hide-me">
 			
 			
-			<!-- home button -->
-			<div
-				class="login-back-arrow d-inline-block"
-				onclick="location.href='/';"
-				style="cursor: pointer;"
+			<!-- back arrow -->
+		<div
+			class="login-back-arrow d-inline-block"
+			onclick="location.href='/requestor-all';"
+			style="cursor: pointer;"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="30"
+				height="30"
+				fill="currentColor"
+				class="bi bi-chevron-left"
+				viewBox="0 0 16 16"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="30"
-					height="30"
-					fill="currentColor"
-					class="bi bi-house"
-					viewBox="0 0 16 16"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
-					/>
-					<path
-						fill-rule="evenodd"
-						d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
-					/>
-				</svg>
-			</div>
+				<path
+					fill-rule="evenodd"
+					d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+				/>
+			</svg>
+		</div>
+        <!-- end of back arrow -->
+			
 
 			<!-- three dots vertical -->
 			<!-- <div
@@ -152,7 +150,7 @@
 								class="alert alert-danger alert-dismissible fade show"
 								role="alert"
 							>
-								Only the remarks field is optional
+								Field with asterisk is required
 								<button
 									type="button"
 									class="btn-close"
@@ -208,7 +206,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Position Title
+								Position Title  *
 							</h6>
 						</div>
 
@@ -226,7 +224,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Place of Assignment
+								Place of Assignment  *
 							</h6>
 						</div>
 
@@ -244,7 +242,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Tools Needed
+								Tools Needed  *
 							</h6>
 						</div>
 
@@ -281,7 +279,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Breif Description of the Job
+								Breif Description of the Job  *
 							</h6>
 						</div>
 
@@ -298,7 +296,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Educational Degree / Certificate or License
+								Educational Degree / Certificate or License  *
 							</h6>
 						</div>
 
@@ -315,7 +313,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Specific Characteristic / Skills Needed
+								Specific Characteristic / Skills Needed  *
 							</h6>
 						</div>
 
@@ -332,7 +330,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Type of Employment
+								Type of Employment  *
 							</h6>
 						</div>
 
@@ -349,7 +347,7 @@
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Type of Request
+								Type of Request  *
 							</h6>
 						</div>
 
@@ -378,6 +376,16 @@
 							></textarea>
 						</div>
 					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-10">
+							<h6>
+								( Field with asterisk is required )
+							</h6>
+						</div>
+					</div>
+					
+					
 
 					<div class="d-inline requestor-submit-btn">
 						<button type="submit" class="btn btn-secondary">Submit</button>

@@ -107,10 +107,10 @@ app.get('/', function (req, res) {
 //login
 app.get('/login', function (req, res) {
 	
-	// Under development mode...
+	
 	//if they are done logged in they can now redirect
 	if (req.session.requestorOpen === true) {
-		return res.redirect('/requestor-create');
+		return res.redirect('/requestor-all');
 	}
 
 	if (req.session.buOpen === true) {
@@ -124,7 +124,7 @@ app.get('/login', function (req, res) {
 	if (req.session.ceoOpen === true) {
 		return res.redirect('/ceo-all');
 	}
-	// Under development mode...
+	
 
 	//Session for incorrect credentials
 	if (req.session.incorrectCredentialsFaker === true) {
@@ -216,7 +216,7 @@ app.post('/login', function (req, res) {
 				//  login data              Access data
 				if (loginInput['email'] === roles[i]['Email']) {
 					//finding his/her role
-					if (roles[i]['Requestor role'] === 'true') currentUserRole = 'requestor-create';
+					if (roles[i]['Requestor role'] === 'true') currentUserRole = 'requestor-all';
 					if (roles[i]['Bu role'] === 'true') currentUserRole = 'bu-all';
 					if (roles[i]['Hr role'] === 'true') currentUserRole = 'hr-all';
 					if (roles[i]['Ceo role'] === 'true') currentUserRole = 'ceo-all';
@@ -230,7 +230,7 @@ app.post('/login', function (req, res) {
 			req.session.email = loginInput['email'];
 
 			//Add role open to the session
-			if (currentUserRole === 'requestor-create') req.session.requestorOpen = true;
+			if (currentUserRole === 'requestor-all') req.session.requestorOpen = true;
 			if (currentUserRole === 'bu-all') req.session.buOpen = true;
 			if (currentUserRole === 'hr-all') req.session.hrOpen = true;
 			if (currentUserRole === 'ceo-all') req.session.ceoOpen = true;
@@ -525,7 +525,7 @@ app.post('/requestor-create', function (req, res) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
-	if (req.body.tools === 'Choose the tools needed...') {
+	if (requestorInput["tools"] === '') {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
