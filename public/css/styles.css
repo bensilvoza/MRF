@@ -1,6 +1,6 @@
 
  /* Mobile and tablet responsiveness message */
-@media screen and (min-width: 100px) and (max-width: 1299px) {
+@media screen and (min-width: 100px) and (max-width: 1199px) {
 	
 /* styling starts here */
 	
@@ -18,7 +18,7 @@
 
 
 
-@media screen and (min-width: 1300px) and (max-width: 1920px) {
+@media screen and (min-width: 1200px) and (max-width: 1920px) {
 	
 /* styling starts here */
 	.mobile-tablet-responsiveness-message {
@@ -29,6 +29,9 @@
 }
 
 /* Media queries... */
+
+
+
 
 
 
@@ -89,6 +92,13 @@
 	
 }
 
+.create-account-login {
+	color: #0c49a3;
+}
+
+.create-account-login:hover {
+	color: blue;
+}
 
 
 
