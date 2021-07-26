@@ -72,6 +72,9 @@ var requestsSchema = new mongoose.Schema({
 	'Bu / ssu': String,
 	'Section Department': String,
 	'Position Title': String,
+	"Competency Level": String,
+	"Number of Headcount": String,
+	"Date Needed": String,
 	'Place of Assignment': String,
 	'Tools Needed': String,
 	'Breif Description of The Job': String,
@@ -493,6 +496,9 @@ app.post('/requestor-create', function (req, res) {
 		buSsu: req.body.buSsu,
 		sectionDepartment: req.body.sectionDepartment,
 		positionTitle: req.body.positionTitle,
+		competencyLevel: req.body.competencyLevel,
+		headcount: req.body.headcount,
+		dateNeeded: req.body.dateNeeded,
 		placeAssignment: req.body.placeAssignment,
 		tools: toolsNeeded,
 		descriptionJob: req.body.descriptionJob,
@@ -505,46 +511,72 @@ app.post('/requestor-create', function (req, res) {
 
 	//all fields are required (except remarks)
 	var empty = '';
+	
 	if (req.body.buLeadName === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.buSsu === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.sectionDepartment === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.positionTitle === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
+	if (req.body.competency === 'Choose competency level...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.headcount === 'Choose number of headcount...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.dateNeeded === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
 	if (req.body.placeAssignment === 'Choose place of assignment...') {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (requestorInput["tools"] === '') {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.descriptionJob === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.educationalDegree === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.specificCharacteristic === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.typeEmployment === 'Choose type of employment...') {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
+	
 	if (req.body.typeRequest === 'Choose type of request...') {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
@@ -598,6 +630,9 @@ app.post('/requestor-create', function (req, res) {
 			'Bu / ssu': requestorInput['buSsu'],
 			'Section Department': requestorInput['sectionDepartment'],
 			'Position Title': requestorInput['positionTitle'],
+			"Competency Level": requestorInput["competencyLevel"],
+			"Number of Headcount": requestorInput["headcount"],
+			"Date Needed": requestorInput["dateNeeded"],
 			'Place of Assignment': requestorInput['placeAssignment'],
 			'Tools Needed': requestorInput['tools'],
 			'Breif Description of The Job': requestorInput['descriptionJob'],
