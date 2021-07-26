@@ -53,6 +53,7 @@ var officialSchema = new mongoose.Schema({
 	Email: String,
 	'Requestor role': String,
 	'Bu role': String,
+	"Finance role": String,
 	'Hr role': String,
 	'Ceo role': String,
 	'Bu lead name': String,
@@ -84,6 +85,7 @@ var requestsSchema = new mongoose.Schema({
 	'Type of Request': String,
 	Remarks: String,
 	'Bu Approval': String,
+	"Finance Approval": String,
 	'Hr Approval': String,
 	'Ceo Approval': String,
 	'Email of The Requestor': String,
@@ -186,7 +188,7 @@ app.post('/login', function (req, res) {
 	//Callback 1
 	Register.find({}, function (error, registers) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var i = 0; i < registers.length; i++) {
 			//Email
@@ -260,6 +262,7 @@ app.post('/official', function (req, res) {
 		email: req.body.email,
 		requestorRole: req.body.requestorRole,
 		buRole: req.body.buRole,
+		financeRole: req.body.financeRole,
 		hrRole: req.body.hrRole,
 		ceoRole: req.body.ceoRole,
 		buLeadName: req.body.buLeadName,
@@ -276,6 +279,7 @@ app.post('/official', function (req, res) {
 		Email: roleInput['email'],
 		'Requestor role': roleInput['requestorRole'],
 		'Bu role': roleInput['buRole'],
+		"Finance role": roleInput["financeRole"],
 		'Hr role': roleInput['hrRole'],
 		'Ceo role': roleInput['ceoRole'],
 		'Bu lead name': roleInput['buLeadName'],
@@ -363,7 +367,7 @@ app.post('/register', function (req, res) {
 	//Callback 1
 	Official.find({}, function (error, roles) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		var email = undefined;
 		for (var i = 0; i < roles.length; i++) {
@@ -1050,11 +1054,11 @@ app.put('/bu-id/:id', function (req, res) {
 			//Pull up the emails of the hr
 			//Callback 3
 			Official.find({}, function (error, officialUsers) {
-				var hrEmails = [];
+				var financeEmails = [];
 
 				for (var officialUser of officialUsers) {
-					if (officialUser['Hr role'] === 'true') {
-						hrEmails.push(officialUser['Email']);
+					if (officialUser['Finance role'] === 'true') {
+						financeEmails.push(officialUser['Email']);
 					}
 				}
 
@@ -1063,7 +1067,7 @@ app.put('/bu-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.buApproval === "Approve"){
-					url = 'https://tranquil-atoll-99479.herokuapp.com/hr-id/' + controlNumber;
+					url = 'https://tranquil-atoll-99479.herokuapp.com/finance-id/' + controlNumber;
 				} else {
 					url = 'https://tranquil-atoll-99479.herokuapp.com/requestor-id/' + controlNumber;
 				}
@@ -1093,7 +1097,7 @@ app.put('/bu-id/:id', function (req, res) {
 					};
 
 					transporter.sendMail(mailOptions, function (error, info) {
-						if (error) return res.send('Something went wrong');
+						if (error) return res.redirect('/');
 
 						console.log('Email sent: ' + info.response);
 
@@ -1103,7 +1107,7 @@ app.put('/bu-id/:id', function (req, res) {
 					//If Bu approval is approved
 					var mailOptions = {
 						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
-						to: hrEmails,
+						to: financeEmails,
 						subject: 'Waiting for response',
 						//text: 'Mrf control number: 123456'
 						html:
@@ -1116,7 +1120,7 @@ app.put('/bu-id/:id', function (req, res) {
 
 					transporter.sendMail(mailOptions, function (error, info) {
 						//If there's potential error
-						if (error) return res.send('Something went wrong');
+						if (error) return res.redirect('/');
 
 						console.log('Email sent: ' + info.response);
 
@@ -1144,6 +1148,276 @@ app.get ("/bu-logout", function (req, res){
 	
 	res.redirect("/login")
 })
+
+
+
+
+//======================================
+//Finance Controller
+//All request, Finance side
+app.get('/finance-all', function (req, res) {
+	//Go to session and check if authorize to enter
+	if (req.session.financeOpen === undefined) return res.redirect('/');
+
+	var financeRequests = [];
+
+	//Callback 1
+	Requests.find({}, function (error, allRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+		for (var oneRequest of allRequest) {
+			if (oneRequest['Bu Approval'] === 'Approve') {
+				financeRequests.push(oneRequest);
+			}
+		}
+
+		//Update
+		allRequest = financeRequests;
+
+		res.render('finance-all', { allRequest: allRequest.reverse() });
+	});
+});
+
+//finance-s-pending
+app.get('/finance-s-pending', function (req, res) {
+	var financeRequests = [];
+
+	//Callback 1
+	Requests.find({}, function (error, allRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+		for (var oneRequest of allRequest) {
+			if (oneRequest['Bu Approval'] === 'Approve') {
+				if (oneRequest['Finance Approval'] === '') {
+					financeRequests.push(oneRequest);
+				}
+			}
+		}
+
+		//Update
+		allRequest = financeRequests;
+
+		res.render('finance-all', { allRequest: allRequest.reverse() });
+	});
+});
+
+//finance-s-approved
+app.get('/finance-s-approved', function (req, res) {
+	var financeRequests = [];
+
+	//Callback 1
+	Requests.find({}, function (error, allRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+		for (var oneRequest of allRequest) {
+			if (oneRequest['Bu Approval'] === 'Approve') {
+				if (oneRequest['Finance Approval'] === 'Approve') {
+					financeRequests.push(oneRequest);
+				}
+			}
+		}
+
+		//Update
+		allRequest = financeRequests;
+
+		res.render('finance-all', { allRequest: allRequest.reverse() });
+	});
+});
+
+//finance-s-declined
+app.get('/finance-s-declined', function (req, res) {
+	var financeRequests = [];
+
+	//Callback 1
+	Requests.find({}, function (error, allRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+		for (var oneRequest of allRequest) {
+			if (oneRequest['Bu Approval'] === 'Approve') {
+				if (oneRequest['Finance Approval'] === 'Decline') {
+					financeRequests.push(oneRequest);
+				}
+			}
+		}
+
+		//Update
+		allRequest = hrRequests;
+
+		res.render('finance-all', { allRequest: allRequest.reverse() });
+	});
+});
+
+//Search, finance side
+app.get('/finance-search/', function (req, res) {
+	var searchID = undefined;
+
+	//Find the single request from the keyword provided
+	Requests.find({}, function (error, allRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+		//Accept ID
+		for (var oneRequest of allRequest) {
+			if (req.query.searchID === oneRequest['ID']) {
+				searchID = oneRequest['ID'];
+				break;
+			}
+		}
+
+		if (searchID === undefined) return res.redirect('back');
+
+		res.redirect('/finance-id/' + searchID);
+	});
+});
+
+//show one request, finance side
+app.get('/finance-id/:id', function (req, res) {
+	
+	//Go to session and check if authorize to enter
+	if (req.session.financeOpen === undefined) return res.redirect('/');
+
+	var paramsUrl = req.params.id;
+
+	//
+	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
+		//If there's potential error
+		if (error) return res.send('Something went wrong');
+
+		res.render('finance-id', { oneRequest: oneRequest });
+	});
+});
+
+//finance
+//Update
+app.put('/finance-id/:id', function (req, res) {
+	var paramsUrl = req.params.id;
+
+	//Pull up the email of requestor and bu, declined purposes
+	var requestorEmailDeclined = undefined;
+	var buEmailDeclined = undefined;
+
+	//Callback 1
+	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
+		//save the email of requestor and bu, declined purposes
+		requestorEmailDeclined = oneRequest['Email of The Requestor'];
+		buEmailDeclined = oneRequest['Email of The Bu'];
+
+		oneRequest['Finance Approval'] = req.body.financeApproval;
+
+		//Update the selected request
+		//Callback 2
+		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error) {
+			//If there's potential error
+			if (error) return res.redirect('/');
+
+			//Pull up emails of the hr
+			//Callback 3
+			Official.find({}, function (error, allRequest) {
+				//If there's potential error
+				if (error) return res.redirect('/');
+
+				var hrEmails = []
+				
+				for (var oneRequest of allRequest){
+					 if (oneRequest["Hr role"] === "true"){
+						 hrEmails.push (oneRequest["Email"])
+					 }
+				}
+
+				// nodemailer starts here
+				var controlNumber = paramsUrl;
+				var url = undefined
+				
+				if (req.body.financeApproval === "Approve"){
+					url = 'https://tranquil-atoll-99479.herokuapp.com/hr-id/' + controlNumber;
+				} else {
+					url = 'https://tranquil-atoll-99479.herokuapp.com/';
+				}
+				
+				
+
+				var transporter = nodemailer.createTransport({
+					service: 'gmail',
+					auth: {
+						user: 'companynodemailer@gmail.com',
+						pass: 'CUtEQ_2%c]]=Tw-',
+					},
+				});
+
+				//If finance approval is declined
+				if (req.body.financeApproval === 'Decline') {
+					var declinedEmails = [];
+					declinedEmails.push(requestorEmailDeclined);
+					declinedEmails.push(buEmailDeclined);
+
+					var mailOptions = {
+						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
+						to: declinedEmails,
+						subject: 'REQUEST DECLINED',
+						html:
+							'<p>Manpower request was declined, <br> Control number: ' +
+							controlNumber +
+							' <br><br><br> Visit the link <a href=' +
+							url +
+							'>here</a> </p>',
+					};
+
+					transporter.sendMail(mailOptions, function (error, info) {
+						if (error) return res.send('Something went wrong');
+
+						console.log('Email sent: ' + info.response);
+
+						res.redirect('/hr-responded');
+					});
+				} else {
+					//If finance approval is approved
+					var mailOptions = {
+						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
+						to: hrEmails,
+						subject: 'Waiting for response',
+						html:
+							'<p>Manpower request is waiting for response, <br> Control number: ' +
+							controlNumber +
+							' <br><br><br> Visit the link <a href=' +
+							url +
+							'>here</a> </p>',
+					};
+
+					transporter.sendMail(mailOptions, function (error, info) {
+						if (error) return res.redirect('/');
+
+						console.log('Email sent: ' + info.response);
+
+						res.redirect('/finance-responded');
+					});
+				}
+			});
+			// End of callback 3
+		});
+		// End of callback 2
+	});
+});
+
+//Hr
+//Request Succesfully Responded
+app.get('/finance-responded', function (req, res) {
+	res.render('finance-responded');
+});
+
+// LOG OUT, hr
+app.get ("/finance-logout", function (req, res){
+	
+	//update session
+	req.session.financeOpen = undefined
+	
+	res.redirect("/login")
+})
+
+
 
 
 
