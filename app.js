@@ -121,6 +121,10 @@ app.get('/login', function (req, res) {
 	if (req.session.buOpen === true) {
 		return res.redirect('/bu-all');
 	}
+	
+	if (req.session.financeOpen === true) {
+		return res.redirect('/finance-all');
+	}
 
 	if (req.session.hrOpen === true) {
 		return res.redirect('/hr-all');
@@ -1374,7 +1378,7 @@ app.put('/finance-id/:id', function (req, res) {
 
 						console.log('Email sent: ' + info.response);
 
-						res.redirect('/hr-responded');
+						res.redirect('/finance-responded');
 					});
 				} else {
 					//If finance approval is approved
@@ -1620,8 +1624,16 @@ app.put('/hr-id/:id', function (req, res) {
 					var declinedEmails = [];
 					declinedEmails.push(requestorEmailDeclined);
 					declinedEmails.push(buEmailDeclined);
-
-					var mailOptions = {
+					
+					// pull up emails of finance for mailing purposes
+					Official.find({}, function (error, roles){
+						for (var role of roles){
+							 if (role["Finance role"] === "true"){
+								 declinedEmails.push (role["Email"])
+							 }
+						}
+						
+						var mailOptions = {
 						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
 						to: declinedEmails,
 						subject: 'REQUEST DECLINED',
@@ -1640,6 +1652,11 @@ app.put('/hr-id/:id', function (req, res) {
 
 						res.redirect('/hr-responded');
 					});
+						
+						
+					})
+
+					
 				} else {
 					//If hr approval is approved
 					var mailOptions = {
