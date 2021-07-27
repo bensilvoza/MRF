@@ -34,6 +34,8 @@
 		<div class="hide-me">
 			
 		
+		
+		
 			
 		<!-- home button -->
 			<div
@@ -97,7 +99,7 @@
 			
 		</div> <!-- End of three dots icon and dropdown inside -->
 	
-		
+
 		<div class="container">
 			
 		  <div class="requestor-all-box">
@@ -185,29 +187,29 @@
 			  
 		  </div>	  
 		</div>
+
 		
 		<hr class="requestor-all-hr">
+		
 		
 		
 		<div class="container mt-5">
 			
 			<div class="row d-flex justify-content-center" style="margin-bottom: 20px;">
 				
-				<div class="col-md-1">
-					<strong>Control no.</strong>
+				<div class="col-md-2">
+					<strong>CONTROL NO.</strong>
 				</div>
 				
 				<div class="col-md-2">
-					<strong>Position Title</strong>
+					<strong>POSITION TITLE</strong>
 				</div>
 				
 				<div class="col-md-6">
 					<span><strong>REQUEST STATUS</strong></span>
 				</div>
 				
-				<div class="col-md-3">
-					<strong>Date Requested</strong>
-				</div>
+				
 			</div>
 			
 			<% for (var requestorData of requestorDataAll){ %>
@@ -215,7 +217,7 @@
 			
 			<div class="row d-flex justify-content-center mt-1 requestor-all-hover" onclick="location.href='/requestor-id/<%= requestorData["ID"] %>'" style="cursor: pointer;">
 				
-				<div class="col-md-1">
+				<div class="col-md-2">
 					<p>
 						<%= requestorData["ID"] %>
 					</p>
@@ -223,7 +225,7 @@
 				
 				<div class="col-md-2">
 					<p>
-						<%= requestorData["Position Title"] %>
+						<%= requestorData["Position Title"].substring(0, 20) %>
 					</p>
 				</div>
 				
@@ -247,32 +249,32 @@
 						
 						<!-- Bu status -->
 						<% if (requestorData["Bu Approval"] === ""){ %>
-							   <% var buStatus = "Pending" %>
+							   <% var buStatus = "Bu: " + "Pending" %>
 						<% } else { %>
-						       <% var buStatus = requestorData["Bu Approval"] %>
+						       <% var buStatus = "Bu: " + requestorData["Bu Approval"] %>
 						<% } %>
 					
 					    
 					    <!-- Finance status -->
 						<% if (requestorData["Finance Approval"] === ""){ %>
-							   <% var financeStatus = "Pending" %>
+							   <% var financeStatus = "Finance: " + "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = requestorData["Finance Approval"] %>
+						       <% var financeStatus = "Finance: " + requestorData["Finance Approval"] %>
 						<% } %>
 					
 						
 						<!-- Hr status -->
 						<% if (requestorData["Hr Approval"] === ""){ %>
-							   <% var hrStatus = "Pending" %>
+							   <% var hrStatus = "Hr: " + "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = requestorData["Hr Approval"] %>
+						       <% var hrStatus = "Hr: " + requestorData["Hr Approval"] %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (requestorData["Ceo Approval"] === ""){ %>
-							   <% var ceoStatus = "Pending" %>
+							   <% var ceoStatus = "Ceo: " + "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = requestorData["Ceo Approval"] %>
+						       <% var ceoStatus = "Ceo: " + requestorData["Ceo Approval"] %>
 						<% } %>
 						
 					
@@ -298,10 +300,10 @@
 						
 						<div class="alert alert-<%= statusColor %>" role="alert" style="border: <%= border %> solid black; padding: 5px; margin-bottom: 0;">
 							
-							<span class="me-4">Bu: <%= buStatus %></span>
-							<span class="me-4">Finance: <%= financeStatus %></span>
-							<span class="me-4">Hr: <%= hrStatus %></span>
-							<span class="me-1">Ceo: <%= ceoStatus %></span>     
+							<span class="me-4"><%= buStatus %></span>
+							<span class="me-4"><%= financeStatus %></span>
+							<span class="me-4"><%= hrStatus %></span>
+							<span class="me-1"><%= ceoStatus %></span>     
 							
 						</div>
 						<!-- Status end here -->
@@ -309,11 +311,7 @@
 					
 				</div>
 				
-				<div class="col-md-3">
-					<p>
-						<%= requestorData["Date Requested"] %>
-					</p>
-				</div>
+				
 			  
 			</div>
 			

@@ -184,7 +184,7 @@
 			
 			<div class="row d-flex justify-content-center" style="margin-bottom: 20px;">
 				
-				<div class="col-md-1">
+				<div class="col-md-2">
 					<strong>Control no.</strong>
 				</div>
 				
@@ -196,9 +196,7 @@
 					<span><strong>REQUEST STATUS</strong></span>
 				</div>
 				
-				<div class="col-md-3">
-					<strong>Date Requested</strong>
-				</div>
+				
 			</div>
 			
 			<% for (var oneRequest of allRequest){ %>
@@ -206,7 +204,7 @@
 			
 			<div class="row d-flex justify-content-center mt-1 requestor-all-hover" onclick="location.href='/finance-id/<%= oneRequest["ID"] %>'" style="cursor: pointer;">
 				
-				<div class="col-md-1">
+				<div class="col-md-2">
 					<p>
 						<%= oneRequest["ID"] %>
 					</p>
@@ -214,7 +212,7 @@
 				
 				<div class="col-md-2">
 					<p>
-						<%= oneRequest["Position Title"] %>
+						<%= oneRequest["Position Title"].substring(0, 20) %>
 					</p>
 				</div>
 				
@@ -238,30 +236,30 @@
 						
 						<!-- Bu status -->
 						<% if (oneRequest["Bu Approval"] === ""){ %>
-							   <% var buStatus = "Pending" %>
+							   <% var buStatus = "Bu: " + "Pending" %>
 						<% } else { %>
-						       <% var buStatus = oneRequest["Bu Approval"] %>
+						       <% var buStatus = "Bu: " + oneRequest["Bu Approval"] %>
 						<% } %>
 					
 					    <!-- Finance status -->
 						<% if (oneRequest["Finance Approval"] === ""){ %>
-							   <% var financeStatus = "Pending" %>
+							   <% var financeStatus = "Finance: " + "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = oneRequest["Finance Approval"] %>
+						       <% var financeStatus = "Finance: " + oneRequest["Finance Approval"] %>
 						<% } %>
 						
 						<!-- Hr status -->
 						<% if (oneRequest["Hr Approval"] === ""){ %>
-							   <% var hrStatus = "Pending" %>
+							   <% var hrStatus = "Hr: " + "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = oneRequest["Hr Approval"] %>
+						       <% var hrStatus = "Hr: " + oneRequest["Hr Approval"] %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (oneRequest["Ceo Approval"] === ""){ %>
-							   <% var ceoStatus = "Pending" %>
+							   <% var ceoStatus = "Ceo: " + "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = oneRequest["Ceo Approval"] %>
+						       <% var ceoStatus = "Ceo: " + oneRequest["Ceo Approval"] %>
 						<% } %>
 						
 						<!-- If bu status is decline -->
@@ -285,10 +283,10 @@
 						
 						<div class="alert alert-<%= statusColor %>" role="alert" style="border: <%= border %> solid black; padding: 5px; margin-bottom: 0;">
 							
-							<span class="me-4">Bu: <%= buStatus %></span>
-							<span class="me-4">Finance: <%= financeStatus %></span>
-							<span class="me-4">Hr: <%= hrStatus %></span>
-							<span>Ceo: <%= ceoStatus %></span>     
+							<span class="me-4"><%= buStatus %></span>
+							<span class="me-4"><%= financeStatus %></span>
+							<span class="me-4"><%= hrStatus %></span>
+							<span><%= ceoStatus %></span>     
 							
 						</div>
 						<!-- Status end here -->
@@ -296,11 +294,7 @@
 					
 				</div>
 				
-				<div class="col-md-3">
-					<p>
-						<%= oneRequest["Date Requested"] %>
-					</p>
-				</div>
+				
 			  
 			</div>
 			
