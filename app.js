@@ -1879,11 +1879,20 @@ app.put('/ceo-id/:id', function (req, res) {
 			Official.find({}, function (error, officialUsers) {
 				var hrEmails = [];
 
+				// pull up email that had a role of hr
 				for (var officialUser of officialUsers) {
 					if (officialUser['Hr role'] === 'true') {
 						hrEmails.push(officialUser['Email']);
 					}
 				}
+				
+				// pull up email that had a role of finance
+				for (var officialUser of officialUsers) {
+					if (officialUser['Finance role'] === 'true') {
+						hrEmails.push(officialUser['Email']);
+					}
+				}
+				
 
 				//Add all receiving email
 				hrEmails.push(requestorEmail);
