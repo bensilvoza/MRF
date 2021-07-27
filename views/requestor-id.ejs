@@ -152,6 +152,7 @@
 						<% var statusColor = "light" %>
 						
 						<% if (sendOneRequest["Bu Approval"] === "Decline") statusColor = "danger" %>
+						<% if (sendOneRequest["Finance Approval"] === "Decline") statusColor = "danger" %>
 						<% if (sendOneRequest["Hr Approval"] === "Decline") statusColor = "danger" %>
 						<% if (sendOneRequest["Ceo Approval"] === "Decline") statusColor = "danger" %>
 						
@@ -170,6 +171,13 @@
 						       <% var buStatus = sendOneRequest["Bu Approval"] %>
 						<% } %>
 						
+						<!-- Finance status -->
+						<% if (sendOneRequest["Finance Approval"] === ""){ %>
+							   <% var financeStatus = "Pending" %>
+						<% } else { %>
+						       <% var financeStatus = sendOneRequest["Finance Approval"] %>
+						<% } %>
+						
 						<!-- Hr status -->
 						<% if (sendOneRequest["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Pending" %>
@@ -186,7 +194,14 @@
 						
 						<!-- If bu status is decline -->
 						<% if (sendOneRequest["Bu Approval"] === "Decline"){ %>
-							   <% hrStatus = "" %>
+							   <% financeStatus = "" %>
+						       <% hrStatus = "" %>
+						       <% ceoStatus = "" %>
+						<% } %>
+						
+						<!-- If finance status is decline -->
+						<% if (sendOneRequest["Finance Approval"] === "Decline"){ %>
+						       <% hrStatus = "" %>
 						       <% ceoStatus = "" %>
 						<% } %>
 						
@@ -197,10 +212,11 @@
 						
 						
 						<div class="alert alert-<%= statusColor %> alert-dismissible fade show" role="alert" style="border: <%= border %> solid black;">
-							<span class="me-5"><strong>STATUS</strong></span>
-							<span class="me-5">Bu: <%= buStatus %></span>
-							<span class="me-5">Hr: <%= hrStatus %></span>
-							<span class="me-5">Ceo: <%= ceoStatus %></span>     
+							<span class="me-3"><strong>STATUS</strong></span>
+							<span class="me-3">Bu: <%= buStatus %></span>
+							<span class="me-3">Finance: <%= financeStatus %></span>
+							<span class="me-3">Hr: <%= hrStatus %></span>
+							<span>Ceo: <%= ceoStatus %></span>     
 							<button
 								type="button"
 								class="btn-close"

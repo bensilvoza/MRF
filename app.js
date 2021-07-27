@@ -223,6 +223,7 @@ app.post('/login', function (req, res) {
 					//finding his/her role
 					if (roles[i]['Requestor role'] === 'true') currentUserRole = 'requestor-all';
 					if (roles[i]['Bu role'] === 'true') currentUserRole = 'bu-all';
+					if (roles[i]['Finance role'] === 'true') currentUserRole = 'finance-all';
 					if (roles[i]['Hr role'] === 'true') currentUserRole = 'hr-all';
 					if (roles[i]['Ceo role'] === 'true') currentUserRole = 'ceo-all';
 				}
@@ -237,6 +238,7 @@ app.post('/login', function (req, res) {
 			//Add role open to the session
 			if (currentUserRole === 'requestor-all') req.session.requestorOpen = true;
 			if (currentUserRole === 'bu-all') req.session.buOpen = true;
+			if (currentUserRole === 'finance-all') req.session.financeOpen = true;
 			if (currentUserRole === 'hr-all') req.session.hrOpen = true;
 			if (currentUserRole === 'ceo-all') req.session.ceoOpen = true;
 
@@ -431,7 +433,7 @@ app.post('/register', function (req, res) {
 //requestor
 app.get('/requestor-create', function (req, res) {
 	//Go to session and check if authorize to enter
-	if (req.session.requestorOpen === undefined) return res.send('Unathorized access');
+	if (req.session.requestorOpen === undefined) return res.redirect('/');
 
 	var requestorData = undefined;
 
@@ -650,6 +652,7 @@ app.post('/requestor-create', function (req, res) {
 			'Email of The Bu': req.session.emailofTheBu,
 			'Date Requested': date,
 			'Bu Approval': '',
+			"Finance Approval": "",
 			'Hr Approval': '',
 			'Ceo Approval': '',
 		});
@@ -1437,7 +1440,7 @@ app.get('/hr-all', function (req, res) {
 		if (error) return res.send('Something went wrong');
 
 		for (var oneRequest of allRequest) {
-			if (oneRequest['Bu Approval'] === 'Approve') {
+			if (oneRequest['Finance Approval'] === 'Approve') {
 				hrRequests.push(oneRequest);
 			}
 		}

@@ -85,7 +85,7 @@
 
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 				
-				<li><a class="dropdown-item" href="/finance-id/<%= sendOneRequest["ID"] %>">Refresh page</a></li>
+				<li><a class="dropdown-item" href="/finance-id/<%= oneRequest["ID"] %>">Refresh page</a></li>
 				<!-- <li><a class="dropdown-item" href="#">Another action</a></li>
 				<li><a class="dropdown-item" href="#">Something else here</a></li> -->
 				
@@ -110,6 +110,7 @@
 						<% var statusColor = "light" %>
 						
 						<% if (oneRequest["Bu Approval"] === "Decline") statusColor = "danger" %>
+						<% if (oneRequest["Finance Approval"] === "Decline") statusColor = "danger" %>
 						<% if (oneRequest["Hr Approval"] === "Decline") statusColor = "danger" %>
 						<% if (oneRequest["Ceo Approval"] === "Decline") statusColor = "danger" %>
 						
@@ -128,6 +129,13 @@
 						       <% var buStatus = oneRequest["Bu Approval"] %>
 						<% } %>
 						
+						<!-- Finance status -->
+						<% if (oneRequest["Finance Approval"] === ""){ %>
+							   <% var financeStatus = "Pending" %>
+						<% } else { %>
+						       <% var financeStatus = oneRequest["Finance Approval"] %>
+						<% } %>
+						
 						<!-- Hr status -->
 						<% if (oneRequest["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Pending" %>
@@ -144,7 +152,14 @@
 						
 						<!-- If bu status is decline -->
 						<% if (oneRequest["Bu Approval"] === "Decline"){ %>
-							   <% hrStatus = "" %>
+							   <% financeStatus = "" %>
+						       <% hrStatus = "" %>
+						       <% ceoStatus = "" %>
+						<% } %>
+						
+						<!-- If finance status is decline -->
+						<% if (oneRequest["Finance Approval"] === "Decline"){ %>
+						       <% hrStatus = "" %>
 						       <% ceoStatus = "" %>
 						<% } %>
 						
@@ -155,10 +170,11 @@
 						
 						
 						<div class="alert alert-<%= statusColor %> alert-dismissible fade show" role="alert" style="border: <%= border %> solid black;">
-							<span class="me-5"><strong>STATUS</strong></span>
-							<span class="me-5">Bu: <%= buStatus %></span>
-							<span class="me-5">Hr: <%= hrStatus %></span>
-							<span class="me-5">Ceo: <%= ceoStatus %></span>     
+							<span class="me-3"><strong>STATUS</strong></span>
+							<span class="me-3">Bu: <%= buStatus %></span>
+							<span class="me-3">Finance: <%= financeStatus %></span>
+							<span class="me-3">Hr: <%= hrStatus %></span>
+							<span>Ceo: <%= ceoStatus %></span>     
 							<button
 								type="button"
 								class="btn-close"

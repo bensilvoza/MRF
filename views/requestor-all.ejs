@@ -193,7 +193,7 @@
 			
 			<div class="row d-flex justify-content-center" style="margin-bottom: 20px;">
 				
-				<div class="col-md-2">
+				<div class="col-md-1">
 					<strong>Control no.</strong>
 				</div>
 				
@@ -201,7 +201,7 @@
 					<strong>Position Title</strong>
 				</div>
 				
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<span><strong>REQUEST STATUS</strong></span>
 				</div>
 				
@@ -215,7 +215,7 @@
 			
 			<div class="row d-flex justify-content-center mt-1 requestor-all-hover" onclick="location.href='/requestor-id/<%= requestorData["ID"] %>'" style="cursor: pointer;">
 				
-				<div class="col-md-2">
+				<div class="col-md-1">
 					<p>
 						<%= requestorData["ID"] %>
 					</p>
@@ -227,12 +227,13 @@
 					</p>
 				</div>
 				
-				<div class="col-md-4">
+				<div class="col-md-6">
 					
 					<!-- Status start here -->
 						<% var statusColor = "light" %>
 						
 						<% if (requestorData["Bu Approval"] === "Decline") statusColor = "danger" %>
+					    <% if (requestorData["Finance Approval"] === "Decline") statusColor = "danger" %>
 						<% if (requestorData["Hr Approval"] === "Decline") statusColor = "danger" %>
 						<% if (requestorData["Ceo Approval"] === "Decline") statusColor = "danger" %>
 						
@@ -250,6 +251,15 @@
 						<% } else { %>
 						       <% var buStatus = requestorData["Bu Approval"] %>
 						<% } %>
+					
+					    
+					    <!-- Finance status -->
+						<% if (requestorData["Finance Approval"] === ""){ %>
+							   <% var financeStatus = "Pending" %>
+						<% } else { %>
+						       <% var financeStatus = requestorData["Finance Approval"] %>
+						<% } %>
+					
 						
 						<!-- Hr status -->
 						<% if (requestorData["Hr Approval"] === ""){ %>
@@ -265,11 +275,20 @@
 						       <% var ceoStatus = requestorData["Ceo Approval"] %>
 						<% } %>
 						
+					
 						<!-- If bu status is decline -->
 						<% if (requestorData["Bu Approval"] === "Decline"){ %>
-							   <% hrStatus = "" %>
+							   <% financeStatus = "" %>
+					           <% hrStatus = "" %>
 						       <% ceoStatus = "" %>
 						<% } %>
+					
+					    <!-- If finance status is decline -->
+						<% if (requestorData["Finance Approval"] === "Decline"){ %>
+					           <% hrStatus = "" %>
+						       <% ceoStatus = "" %>
+						<% } %>
+					    
 						
 						<!-- If Hr status is decline -->
 						<% if (requestorData["Hr Approval"] === "Decline"){ %>
@@ -280,6 +299,7 @@
 						<div class="alert alert-<%= statusColor %>" role="alert" style="border: <%= border %> solid black; padding: 5px; margin-bottom: 0;">
 							
 							<span class="me-4">Bu: <%= buStatus %></span>
+							<span class="me-4">Finance: <%= financeStatus %></span>
 							<span class="me-4">Hr: <%= hrStatus %></span>
 							<span class="me-1">Ceo: <%= ceoStatus %></span>     
 							
