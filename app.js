@@ -219,7 +219,7 @@ app.post('/login', function (req, res) {
 		//Callback 2
 		Official.find({}, function (error, roles) {
 			//If there's potential error
-			if (error) return res.send('Something went wrong');
+			if (error) return res.redirect('/');
 
 			for (var i = 0; i < roles.length; i++) {
 				//  login data              Access data
@@ -258,7 +258,7 @@ app.post('/login', function (req, res) {
 app.get('/official', function (req, res) {
 	//Go to session and check if you are authorize to enter
 	if (req.session.officialOpen === true) res.render('official');
-	else res.send('Unathorized access');
+	else res.redirect('/');
 });
 
 app.post('/official', function (req, res) {
@@ -300,7 +300,7 @@ app.post('/official', function (req, res) {
 	//save
 	roleInputSubmit.save(function (error) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 		else {
 			res.redirect('/official-submitted');
 		}
@@ -421,7 +421,7 @@ app.post('/register', function (req, res) {
 
 		submit.save(function (error) {
 			//If there's potential error
-			if (error) return res.send('Something went wrong');
+			if (error) return res.redirect('/');
 
 			req.session.accountHelper = true;
 			
@@ -664,7 +664,7 @@ app.post('/requestor-create', function (req, res) {
 		//Callback 2
 		requestorInputSubmit.save(function (error) {
 			//If there's potential error
-			if (error) return res.send('Something went wrong');
+			if (error) return res.redirect('/');
 
 			// nodemailer
 			// nodemailer starts here
@@ -694,7 +694,7 @@ app.post('/requestor-create', function (req, res) {
 			//Callback 3
 			transporter.sendMail(mailOptions, function (error, info) {
 				//If there's potential error
-				if (error) return res.send('Something went wrong');
+				if (error) return res.redirect('/');
 
 				console.log('Email sent: ' + info.response);
 
@@ -716,7 +716,7 @@ app.get('/requestor-submitted', function (req, res) {
 //All request, requestor side
 app.get('/requestor-all', function (req, res) {
 	//Go to session and check if authorize to enter
-	if (req.session.requestorOpen === undefined) return res.send('Unathorized access');
+	if (req.session.requestorOpen === undefined) return res.redirect('/');
 
 	//pull up all data associated with this email, from Requests database
 	var requestorDataAll = [];
@@ -724,7 +724,7 @@ app.get('/requestor-all', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, getRequests) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
@@ -745,7 +745,7 @@ app.get('/requestor-s-pending', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, getRequests) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
@@ -768,7 +768,7 @@ app.get('/requestor-s-approved', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, getRequests) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
@@ -791,7 +791,7 @@ app.get('/requestor-s-declined', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, getRequests) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
@@ -813,7 +813,7 @@ app.get('/requestor-search/', function (req, res) {
 	//Find the single request from the keyword provided
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		//Accept ID
 		for (var oneRequest of allRequest) {
@@ -892,7 +892,7 @@ app.get ("/requestor-logout", function (req, res){
 //bu-all
 app.get('/bu-all', function (req, res) {
 	//Go to session and check if authorize to enter
-	if (req.session.buOpen === undefined) return res.send('Unathorized access');
+	if (req.session.buOpen === undefined) return res.redirect('/');
 
 	var sendManyRequest = [];
 
@@ -900,7 +900,7 @@ app.get('/bu-all', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (req.session.email === oneRequest['Email of The Bu']) {
@@ -921,7 +921,7 @@ app.get('/bu-s-pending', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (req.session.email === oneRequest['Email of The Bu']) {
@@ -944,7 +944,7 @@ app.get('/bu-s-approved', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (req.session.email === oneRequest['Email of The Bu']) {
@@ -967,7 +967,7 @@ app.get('/bu-s-declined', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (req.session.email === oneRequest['Email of The Bu']) {
@@ -989,7 +989,7 @@ app.get('/bu-search/', function (req, res) {
 	//Find the single request from the keyword provided
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		//Accept ID
 		for (var oneRequest of allRequest) {
@@ -1018,7 +1018,7 @@ app.get('/bu-id/:id', function (req, res) {
 	//pull up data from Requests database from the ID he/she provided
 	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		sendOneRequest = oneRequest;
 
@@ -1292,7 +1292,7 @@ app.get('/finance-id/:id', function (req, res) {
 	//
 	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		res.render('finance-id', { oneRequest: oneRequest });
 	});
@@ -1374,7 +1374,7 @@ app.put('/finance-id/:id', function (req, res) {
 					};
 
 					transporter.sendMail(mailOptions, function (error, info) {
-						if (error) return res.send('Something went wrong');
+						if (error) return res.redirect('/');
 
 						console.log('Email sent: ' + info.response);
 
@@ -1434,14 +1434,14 @@ app.get ("/finance-logout", function (req, res){
 //All request, Hr side
 app.get('/hr-all', function (req, res) {
 	//Go to session and check if authorize to enter
-	if (req.session.hrOpen === undefined) return res.send('Unathorized access');
+	if (req.session.hrOpen === undefined) return res.redirect('/');
 
 	var hrRequests = [];
 
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Finance Approval'] === 'Approve') {
@@ -1463,7 +1463,7 @@ app.get('/hr-s-pending', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Bu Approval'] === 'Approve') {
@@ -1487,7 +1487,7 @@ app.get('/hr-s-approved', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Bu Approval'] === 'Approve') {
@@ -1511,7 +1511,7 @@ app.get('/hr-s-declined', function (req, res) {
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Bu Approval'] === 'Approve') {
@@ -1535,7 +1535,7 @@ app.get('/hr-search/', function (req, res) {
 	//Find the single request from the keyword provided
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		//Accept ID
 		for (var oneRequest of allRequest) {
@@ -1562,7 +1562,7 @@ app.get('/hr-id/:id', function (req, res) {
 	//
 	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		res.render('hr-id', { oneRequest: oneRequest });
 	});
@@ -1589,13 +1589,13 @@ app.put('/hr-id/:id', function (req, res) {
 		//Callback 2
 		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error) {
 			//If there's potential error
-			if (error) return res.send('Something went wrong');
+			if (error) return res.redirect('/');
 
 			//Pull up the email of the ceo
 			//Callback 3
 			Official.findOne({ 'Ceo role': 'true' }, function (error, oneRequest) {
 				//If there's potential error
-				if (error) return res.send('Something went wrong');
+				if (error) return res.redirect('/');
 
 				var ceoEmail = oneRequest['Email'];
 
@@ -1646,7 +1646,7 @@ app.put('/hr-id/:id', function (req, res) {
 					};
 
 					transporter.sendMail(mailOptions, function (error, info) {
-						if (error) return res.send('Something went wrong');
+						if (error) return res.redirect('/');
 
 						console.log('Email sent: ' + info.response);
 
@@ -1672,7 +1672,7 @@ app.put('/hr-id/:id', function (req, res) {
 					};
 
 					transporter.sendMail(mailOptions, function (error, info) {
-						if (error) return res.send('Something went wrong');
+						if (error) return res.redirect('/');
 
 						console.log('Email sent: ' + info.response);
 
@@ -1709,7 +1709,7 @@ app.get ("/hr-logout", function (req, res){
 //All request, ceo side
 app.get('/ceo-all', function (req, res) {
 	//Go to session and check if authorize to enter
-	if (req.session.ceoOpen === undefined) return res.send('Unathorized access');
+	if (req.session.ceoOpen === undefined) return res.redirect('/');
 
 	//Callback 1
 	Requests.find({}, function (error, allRequest) {
@@ -1717,7 +1717,7 @@ app.get('/ceo-all', function (req, res) {
 		var ceoRequests = [];
 
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Hr Approval'] === 'Approve') {
@@ -1741,7 +1741,7 @@ app.get('/ceo-s-pending', function (req, res) {
 		var ceoRequests = [];
 
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Hr Approval'] === 'Approve') {
@@ -1767,7 +1767,7 @@ app.get('/ceo-s-approved', function (req, res) {
 		var ceoRequests = [];
 
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Hr Approval'] === 'Approve') {
@@ -1793,7 +1793,7 @@ app.get('/ceo-s-declined', function (req, res) {
 		var ceoRequests = [];
 
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
 			if (oneRequest['Hr Approval'] === 'Approve') {
@@ -1818,7 +1818,7 @@ app.get('/ceo-search/', function (req, res) {
 	//Find the single request from the keyword provided
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		//Accept ID
 		for (var oneRequest of allRequest) {
@@ -1845,7 +1845,7 @@ app.get('/ceo-id/:id', function (req, res) {
 	//
 	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
 		//If there's potential error
-		if (error) return res.send('Something went wrong');
+		if (error) return res.redirect('/');
 
 		res.render('ceo-id', { oneRequest: oneRequest });
 	});
@@ -1872,7 +1872,7 @@ app.put('/ceo-id/:id', function (req, res) {
 		//Callback 2
 		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error) {
 			//If there's potential error
-			if (error) return res.send('Something went wrong');
+			if (error) return res.redirect('/');
 
 			//Pull hr emails
 			//Callback 3
@@ -1940,7 +1940,7 @@ app.put('/ceo-id/:id', function (req, res) {
 
 				transporter.sendMail(mailOptions, function (error, info) {
 					//If there's potential error
-					if (error) return res.send('Something went wrong');
+					if (error) return res.redirect('/');
 
 					console.log('Email sent: ' + info.response);
 
