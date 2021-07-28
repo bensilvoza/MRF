@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+			crossorigin="anonymous"
+		/>
+
+		<!-- CSS only -->
+		<link rel="stylesheet" href="/css/styles.css" />
+
+		<title>Manpower Requisition Form</title>
+	</head>
+	<body>
+		<!-- Mobile and tablet responsiveness message -->
+		<div class="container mobile-tablet-responsiveness-message">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-10" style="border-bottom: 4px solid lightgray;">
+					<h4 style="margin-top: 10rem;">
+						We're working our best to make this website readable on mobile and tablet
+						devices.
+					</h4>
+				</div>
+			</div>
+		</div>
+		<!-- End mobile and tablet responsiveness message -->
+
+		<div class="hide-me">
+			
+			
+			<!-- back arrow -->
+		<div
+			class="login-back-arrow d-inline-block"
+			onclick="location.href='/requestor-id/<%= oneRequest["ID"] %>';"
+			style="cursor: pointer;"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="30"
+				height="30"
+				fill="currentColor"
+				class="bi bi-chevron-left"
+				viewBox="0 0 16 16"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+				/>
+			</svg>
+		</div>
+        <!-- end of back arrow -->
+			
+
+			<!-- three dots vertical -->
+			<!-- <div
+			class="d-inline-block login-three-dots"
+			data-bs-toggle="modal"
+			data-bs-target="#exampleModal"
+			style="cursor: pointer;"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="30"
+				height="30"
+				fill="currentColor"
+				class="bi bi-three-dots-vertical"
+				viewBox="0 0 16 16"
+			>
+				<path
+					d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+				/>
+			</svg>
+		</div> -->
+
+			<!-- Modal -->
+			<!-- <div
+			class="modal fade"
+			id="exampleModal"
+			tabindex="-1"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div onclick="location.href='/requestor-all';" style="cursor: pointer;">
+							<p class="requestor-create-see-all-request-hover">
+								See all request
+							</p>
+						</div>
+
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+			<!-- Three dots icon and dropdown inside -->
+			<div class="d-inline-block login-three-dots">
+				<div
+					style="cursor: pointer;"
+					id="dropdownMenuButton1"
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="30"
+						height="30"
+						fill="currentColor"
+						class="bi bi-three-dots-vertical"
+						viewBox="0 0 16 16"
+					>
+						<path
+							d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+						/>
+					</svg>
+				</div>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item" href="/requestor-all">See all request</a></li>
+					<!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li> -->
+				</ul>
+			</div>
+			<!-- End of three dots icon and dropdown inside -->
+
+			<h2 class="text-center mt-3">Edit Request</h2>
+			<div class="requestor-hr">
+				<hr />
+			</div>
+
+			
+			<form action="/requestor-edit/<%= oneRequest["ID"] %>?_method=put" method="post" autocomplete="off">
+				<div class="container">
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-7 requestor-create-padding">
+							<% if (emptyFields){ %>
+
+							<div
+								class="alert alert-danger alert-dismissible fade show"
+								role="alert"
+							>
+								Field with asterisk is required
+								<button
+									type="button"
+									class="btn-close"
+									data-bs-dismiss="alert"
+									aria-label="Close"
+								></button>
+							</div>
+
+							<% } %>
+						</div>
+					</div>
+					
+					
+					
+					
+					<div class="row justify-content-end mt-1">
+						<div class="col-md-3">
+							<h6>
+								Control No.
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<input readonly class="form-control form-control-lg" type="text"
+							name="buLeadName" value="<%= oneRequest["ID"] %>" />
+						</div>
+					</div>
+					
+					
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								BU Lead Name
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<input readonly class="form-control form-control-lg" type="text"
+							name="buLeadName" value="<%= oneRequest["Bu Lead Name"] %>" />
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								BU / SSU
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<input readonly class="form-control form-control-lg" type="text"
+							name="buSsu" value="<%= oneRequest["Bu / ssu"] %>" />
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Section / Department
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<input readonly class="form-control form-control-lg" type="text"
+							name="sectionDepartment" value="<%= oneRequest["Section Department"]
+							%>" />
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Position Title  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<div class="form-group">
+								<input
+									class="form-control form-control-lg"
+									type="text"
+									name="positionTitle"
+									value="<%= oneRequest["Position Title"] %>"
+								/>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Competency Level  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<select name="competencyLevel" class="form-control form-control-lg" value="Heyzxc">
+								<option selected><%= oneRequest["Competency Level"] %></option>
+								<option>Non-supervisory</option>
+								<option>Supervisory</option>
+								<option>Managerial</option>
+								<option>Executive</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								No. of Headcount  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<select name="headcount" class="form-control form-control-lg">
+								<option selected><%= oneRequest["Number of Headcount"] %></option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Date Needed  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<div class="form-group">
+								<input
+									class="form-control form-control-lg"
+									type="text"
+									name="dateNeeded"
+									value="<%= oneRequest["Date Needed"] %>"
+								/>
+							</div>
+						</div>
+					</div>
+					
+					
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Place of Assignment  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<select name="placeAssignment" class="form-control form-control-lg">
+								<option selected> <%= oneRequest["Place of Assignment"] %> </option>
+								<option>Davao</option>
+								<option>Madaum</option>
+								<option>Paranaque</option>
+								<option>Trento</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Tools Needed  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<!-- <select name="tools" class="form-control form-control-lg">
+								<option>Choose the tools needed...</option>
+								<option>PPE</option>
+								<option>Laptop</option>
+								<option>Desktop</option>
+								<option>Office 365 account</option>
+							</select> -->
+							
+							<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="ppe" value="PPE">
+                              <label class="form-check-label" for="inlineCheckbox1">PPE</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="laptop" value="Laptop">
+                              <label class="form-check-label" for="inlineCheckbox2">Laptop</label>
+                            </div>                            
+							<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="desktop" value="Desktop">
+                              <label class="form-check-label" for="inlineCheckbox2">Desktop</label>
+                            </div>
+							<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="office" value="Office 365 account">
+                              <label class="form-check-label" for="inlineCheckbox2">Office 365 account</label>
+                            </div>
+							
+							
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Breif Description of the Job  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<textarea
+								class="form-control"
+								id="exampleFormControlTextarea1"
+								rows="8"
+								name="descriptionJob"
+							> <%= oneRequest["Breif Description of The Job"] %> </textarea>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Educational Degree / Certificate or License  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<textarea
+								class="form-control"
+								id="exampleFormControlTextarea1"
+								rows="8"
+								name="educationalDegree"
+							> <%= oneRequest["Educational Degree"] %> </textarea>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Specific Characteristic / Skills Needed  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<textarea
+								class="form-control"
+								id="exampleFormControlTextarea1"
+								rows="8"
+								name="specificCharacteristic"
+							> <%= oneRequest["Specific Characteristic"] %> </textarea>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Type of Employment  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<select name="typeEmployment" class="form-control form-control-lg">
+								<option selected> <%= oneRequest["Type of Employment"] %> </option>
+								<option>Full-Time</option>
+								<option>Agent Hire / Outsource</option>
+								<option>Project-Based</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Type of Request  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<select name="typeRequest" class="form-control form-control-lg">
+								<option selected> <%= oneRequest["Type of Request"] %> </option>
+								<option>Budgeted</option>
+								<option>Unbudgeted</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Remarks
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<textarea
+								class="form-control"
+								id="exampleFormControlTextarea1"
+								rows="8"
+								name="remarks"
+							> <%= oneRequest["Remarks"] %> </textarea>
+						</div>
+					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-10">
+							<h6>
+								( Field with asterisk is required )
+							</h6>
+						</div>
+					</div>
+					
+					
+					<div class="d-inline requestor-submit-btn">
+						<button type="submit" class="btn btn-secondary">Send update</button>
+					</div>
+					
+				</div>
+			</form>
+		</div>
+		<!-- hide-me -->
+
+		<!-- JavaScript Bundle with Popper -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

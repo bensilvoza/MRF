@@ -84,15 +84,13 @@ var requestsSchema = new mongoose.Schema({
 	'Type of Employment': String,
 	'Type of Request': String,
 	Remarks: String,
-	'Bu Approval': String,
-	"Finance Approval": String,
-	'Hr Approval': String,
-	'Ceo Approval': String,
+
 	'Email of The Requestor': String,
 	'Email of The Bu': String,
 	'Date Requested': String,
 
 	'Bu Approval': String,
+	"Finance Approval": String,
 	'Hr Approval': String,
 	'Ceo Approval': String,
 });
@@ -856,6 +854,242 @@ app.get('/requestor-id/:id', function (req, res) {
 	//End of callback 1
 });
 
+
+// edit request, requestor side
+app.get('/requestor-edit/:id', function (req, res) {
+	
+	//Go to session and check if authorize to enter
+	if (req.session.requestorOpen === undefined) return res.redirect('/');
+	
+	
+	//Session for empty fields
+	if (req.session.emptyFieldsFaker === true) {
+		req.session.emptyFields = true;
+	} else {
+		req.session.emptyFields = false;
+	}
+
+	//Update the session, target the faker
+	req.session.emptyFieldsFaker = undefined;
+	
+	
+
+	
+	var paramsUrl = req.params.id;
+
+	//pull up data from Requests database from the ID he/she provided
+	//Callback 1
+	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
+		//If there's potential error
+		if (error) return res.redirect('/');
+
+
+		//If nothing is found
+		if (oneRequest === undefined) {
+			return res.redirect('back');
+		}
+
+		res.render('requestor-edit', { oneRequest: oneRequest, emptyFields: req.session.emptyFields } );
+	});
+	//End of callback 1
+});
+
+app.put('/requestor-edit/:id', function (req, res) {
+	
+	var paramsUrl = req.params.id;
+	
+	// tools needed
+	var toolsNeeded = ""
+	
+	//
+	if (req.body.ppe !== undefined) toolsNeeded = toolsNeeded + req.body.ppe + ", "
+	
+	if (req.body.laptop !== undefined) toolsNeeded = toolsNeeded + req.body.laptop + ", "
+	
+	if (req.body.desktop !== undefined) toolsNeeded = toolsNeeded + req.body.desktop + ", "
+	
+	if (req.body.office !== undefined) toolsNeeded = toolsNeeded + req.body.office
+	
+	//
+	var removeComma = ""
+	if (toolsNeeded[toolsNeeded.length - 2] === ","){
+		for (var i = 0; i < toolsNeeded.length - 2; i++){
+			 removeComma = removeComma + toolsNeeded[i]
+		}
+		
+		toolsNeeded = removeComma
+	}
+	
+	
+
+	//requestor input
+	var requestorInput = {
+		buLeadName: req.body.buLeadName,
+		buSsu: req.body.buSsu,
+		sectionDepartment: req.body.sectionDepartment,
+		positionTitle: req.body.positionTitle,
+		competencyLevel: req.body.competencyLevel,
+		headcount: req.body.headcount,
+		dateNeeded: req.body.dateNeeded,
+		placeAssignment: req.body.placeAssignment,
+		tools: toolsNeeded,
+		descriptionJob: req.body.descriptionJob,
+		educationalDegree: req.body.educationalDegree,
+		specificCharacteristic: req.body.specificCharacteristic,
+		typeEmployment: req.body.typeEmployment,
+		typeRequest: req.body.typeRequest,
+		remarks: req.body.remarks,
+	};
+
+	//all fields are required (except remarks)
+	var empty = '';
+	
+	if (req.body.buLeadName === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.buSsu === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.sectionDepartment === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.positionTitle === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.competency === 'Choose competency level...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.headcount === 'Choose number of headcount...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.dateNeeded === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.placeAssignment === 'Choose place of assignment...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (requestorInput["tools"] === '') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.descriptionJob === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.educationalDegree === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.specificCharacteristic === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.typeEmployment === 'Choose type of employment...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.typeRequest === 'Choose type of request...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+
+	
+	
+	//
+	Requests.findOne({"ID": paramsUrl}, function (error, foundRequest){
+		
+		if (error) return res.redirect("/")
+		
+		//
+		foundRequest["Position Title"] = requestorInput['positionTitle']
+		foundRequest["Competency Level"] = requestorInput["competencyLevel"]
+		foundRequest["Number of Headcount"] = requestorInput["headcount"]
+		foundRequest["Date Needed"] = requestorInput["dateNeeded"]
+		foundRequest["Place of Assignment"] = requestorInput['placeAssignment']
+		foundRequest["Tools Needed"] = requestorInput['tools']
+		foundRequest["Breif Description of The Job"] = requestorInput['descriptionJob']
+		foundRequest["Educational Degree"] = requestorInput['educationalDegree']
+		foundRequest["Specific Characteristic"] = requestorInput['specificCharacteristic']
+		foundRequest["Type of Employment"] = requestorInput['typeEmployment']
+		foundRequest["Type of Request"] = requestorInput['typeRequest']
+		foundRequest["Remarks"] = requestorInput['remarks']
+		
+		foundRequest["Bu Approval"] = ""
+		foundRequest["Finance Approval"] = ""
+		foundRequest["Hr Approval"] = ""
+		foundRequest["Ceo Approval"] = ""
+		
+		
+		Requests.findOneAndUpdate({"ID": paramsUrl}, foundRequest, function (error, oneRequest){
+			
+			if (error) return res.redirect("/")
+			
+			// nodemailer
+			// nodemailer starts here
+			var controlNumber = paramsUrl;
+			var url = 'https://tranquil-atoll-99479.herokuapp.com/bu-id/' + controlNumber;
+
+			var transporter = nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+					user: 'companynodemailer@gmail.com',
+					pass: 'CUtEQ_2%c]]=Tw-',
+				},
+			});
+
+			var mailOptions = {
+				from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
+				to: oneRequest["Email of The Bu"],
+				subject: 'Waiting for response',
+				html:
+					'<p>Manpower request is waiting for response, <br> Control number: ' +
+					controlNumber +
+					' <br><br><br> Visit the link <a href=' +
+					url +
+					'>here</a> </p>',
+			};
+
+			//Callback 3
+			transporter.sendMail(mailOptions, function (error, info) {
+				//If there's potential error
+				if (error) return res.redirect('/');
+
+				console.log('Email sent: ' + info.response);
+
+				res.redirect('/requestor-submitted');
+			});
+			// End of nodemailer
+		})
+		
+	})
+		
+	
+
+	
+})
+
+
 //Delete, requestor side
 app.delete('/requestor-delete/:id', function (req, res) {
 	//Check
@@ -1141,6 +1375,142 @@ app.put('/bu-id/:id', function (req, res) {
 	});
 	//End of callback 1
 });
+
+
+
+// edit, bu side
+app.get("/bu-edit/:id", function (req, res){
+	
+	var paramsUrl = req.params.id
+	
+	Requests.findOne({"ID": paramsUrl}, function (error, foundRequest){
+		if (error) return res.redirect("/")
+		
+		var sendOneRequest = foundRequest
+		
+		res.render("bu-edit", {"sendOneRequest": sendOneRequest})
+	})
+	
+})
+
+
+app.put("/bu-edit/:id", function (req, res){
+	
+	var paramsUrl = req.params.id;
+
+	//Pull up requestor email, if request is declined
+	var requestorEmailDeclined = undefined;
+
+	//Callback 1
+	Requests.findOne({ ID: paramsUrl }, function (error, oneRequest) {
+		//If there's potential error
+		if (error) {
+			console.log(error);
+			return res.redirect('back');
+		}
+
+		//Pull up and save email of the requestor
+		requestorEmailDeclined = oneRequest['Email of The Requestor'];
+
+		oneRequest['Bu Approval'] = req.body.buApproval;
+		oneRequest['Finance Approval'] = "";
+		oneRequest['Hr Approval'] = "";
+		oneRequest['Ceo Approval'] = "";
+		
+
+		//Callback 2
+		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error, oneRequest) {
+			//If there's potential error
+			if (error) {
+				console.log(error);
+				return res.redirect('back');
+			}
+
+			//Pull up the emails of the hr
+			//Callback 3
+			Official.find({}, function (error, officialUsers) {
+				var financeEmails = [];
+
+				for (var officialUser of officialUsers) {
+					if (officialUser['Finance role'] === 'true') {
+						financeEmails.push(officialUser['Email']);
+					}
+				}
+
+				// nodemailer starts here
+				var controlNumber = paramsUrl;
+				var url = undefined
+				
+				if (req.body.buApproval === "Approve"){
+					url = 'https://tranquil-atoll-99479.herokuapp.com/finance-id/' + controlNumber;
+				} else {
+					url = 'https://tranquil-atoll-99479.herokuapp.com/requestor-id/' + controlNumber;
+				}
+				
+				
+
+				var transporter = nodemailer.createTransport({
+					service: 'gmail',
+					auth: {
+						user: 'companynodemailer@gmail.com',
+						pass: 'CUtEQ_2%c]]=Tw-',
+					},
+				});
+
+				//If Bu approval is declined
+				if (req.body.buApproval === 'Decline') {
+					var mailOptions = {
+						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
+						to: requestorEmailDeclined,
+						subject: 'REQUEST DECLINED',
+						html:
+							'<p>Manpower request was declined, <br> Control number: ' +
+							controlNumber +
+							' <br><br><br> Visit the link <a href=' +
+							url +
+							'>here</a> </p>',
+					};
+
+					transporter.sendMail(mailOptions, function (error, info) {
+						if (error) return res.redirect('/');
+
+						console.log('Email sent: ' + info.response);
+
+						res.redirect('/bu-responded');
+					});
+				} else {
+					//If Bu approval is approved
+					var mailOptions = {
+						from: '"Manpower Requisition Form" <companynodemailer@gmail.com>',
+						to: financeEmails,
+						subject: 'Waiting for response',
+						//text: 'Mrf control number: 123456'
+						html:
+							'<p>Manpower request is waiting for response, <br> Control number: ' +
+							controlNumber +
+							' <br><br><br> Visit the link <a href=' +
+							url +
+							'>here</a> </p>',
+					};
+
+					transporter.sendMail(mailOptions, function (error, info) {
+						//If there's potential error
+						if (error) return res.redirect('/');
+
+						console.log('Email sent: ' + info.response);
+
+						res.redirect('/bu-responded');
+					});
+				}
+			});
+			// End of callback 3
+		});
+		//End of callback 2
+	});
+	//End of callback 1
+	
+})
+
 
 //bu-request-responded
 app.get('/bu-responded', function (req, res) {
