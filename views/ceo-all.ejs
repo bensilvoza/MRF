@@ -188,11 +188,11 @@
 			<div class="row d-flex justify-content-center" style="margin-bottom: 20px;">
 				
 				<div class="col-md-2">
-					<strong>Control no.</strong>
+					<strong>CONTROL NO.</strong>
 				</div>
 				
 				<div class="col-md-2">
-					<strong>Position Title</strong>
+					<strong>POSITION TITLE</strong>
 				</div>
 				
 				<div class="col-md-6">
@@ -222,14 +222,14 @@
 				<div class="col-md-6">
 					
 					<!-- Status start here -->
-						<% var statusColor = "light" %>
+						<% var statusColor = "black" %>
 						
-						<% if (oneRequest["Bu Approval"] === "Decline") statusColor = "danger" %>
-					    <% if (oneRequest["Finance Approval"] === "Decline") statusColor = "danger" %>
-						<% if (oneRequest["Hr Approval"] === "Decline") statusColor = "danger" %>
-						<% if (oneRequest["Ceo Approval"] === "Decline") statusColor = "danger" %>
+						<% if (oneRequest["Bu Approval"] === "Decline") statusColor = "red" %>
+					    <% if (oneRequest["Finance Approval"] === "Decline") statusColor = "red" %>
+						<% if (oneRequest["Hr Approval"] === "Decline") statusColor = "red" %>
+						<% if (oneRequest["Ceo Approval"] === "Decline") statusColor = "red" %>
 						
-						<% if (oneRequest["Ceo Approval"] === "Approve") statusColor = "success" %>
+						<% if (oneRequest["Ceo Approval"] === "Approve") statusColor = "green" %>
 						
 						<% if (statusColor === "light"){ %>
 						       <% var border = "1px" %>
@@ -284,7 +284,7 @@
 						<% } %>
 						
 						
-						<div class="alert alert-<%= statusColor %>" role="alert" style="border: <%= border %> solid black; padding: 5px; margin-bottom: 0;">
+						<div class="alert alert-light" role="alert" style="border: 1px solid <%= statusColor %>; padding: 5px; margin-bottom: 0;">
 							
 							<span class="me-4"><%= buStatus %></span>
 							<span class="me-4"><%= financeStatus %></span>

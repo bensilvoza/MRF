@@ -147,7 +147,8 @@
 
 
 .requestor-all-hover:hover {
-	border: 5px solid lightgray;
+	border: 1px solid black;
+	
 }
 
 
