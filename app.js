@@ -1252,7 +1252,7 @@ app.get('/finance-s-declined', function (req, res) {
 		}
 
 		//Update
-		allRequest = hrRequests;
+		allRequest = financeRequests;
 
 		res.render('finance-all', { allRequest: allRequest.reverse() });
 	});
