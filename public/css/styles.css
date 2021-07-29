@@ -97,7 +97,9 @@
 }
 
 .create-account-login:hover {
-	color: blue;
+	border-bottom: 1px solid #0c49a3;
+	margin-top: 3px;
+	
 }
 
 
@@ -182,6 +184,17 @@
 
 .search-helper-color:hover {
 	color: purple;
+}
+
+
+
+
+/* Bu,  */
+.main-page-all-request {
+	border-bottom: 1px solid black;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 800;
 }
 
 
