@@ -83,12 +83,10 @@
 
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 				
-				<li><a class="dropdown-item" href="/requestor-id/<%= sendOneRequest["ID"] %>">Refresh Page</a></li>
+				<li><a class="dropdown-item" href="/requestor-id/<%= sendOneRequest["ID"] %>">Refresh page</a></li>
 				
-				<% if (sendOneRequest["Ceo Approval"] !== "Approve"){ %>
-				    <li><a class="dropdown-item" href="/requestor-edit/<%= sendOneRequest["ID"] %>">Edit Request</a></li>
-				<% } %>
-				<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Delete Request</a></li>
+				
+				<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Delete request</a></li>
 				
 				
 				<!-- <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -499,6 +497,44 @@
 						> <%= sendOneRequest["Remarks"] %> </textarea>
 					</div>
 				</div>
+				
+				
+				<% var checkIfDeclined = false %>
+				
+				<% if (sendOneRequest["Bu Approval"] === "Decline") {%>
+				       <% checkIfDeclined = true %>
+				<% } %>
+				
+				<% if (sendOneRequest["Finance Approval"] === "Decline") {%>
+				       <% checkIfDeclined = true %>
+				<% } %>
+				
+				<% if (sendOneRequest["Hr Approval"] === "Decline") {%>
+				       <% checkIfDeclined = true %>
+				<% } %>
+				
+				<% if (sendOneRequest["Ceo Approval"] === "Decline") {%>
+				       <% checkIfDeclined = true %>
+				<% } %>
+				
+				<% if (checkIfDeclined){ %>
+				<div class="row justify-content-end mt-4">
+					<div class="col-md-3">
+						<h6 class="text-danger">
+							Declined Message
+						</h6>
+					</div>
+
+					<div class="col-md-7">
+						<div class="alert alert-danger" role="alert">
+                           <%= sendOneRequest["Declined Message"] %>
+                        </div>
+					</div>
+				</div>
+				<% } %>
+				
+				
+				
 				
 				
 				<br>

@@ -502,6 +502,30 @@
 					</div>
 				</div>
 				
+				
+				<% if (oneRequest["Finance Approval"] === "" || oneRequest["Finance Approval"] === "Decline"){ %>
+				<div class="row justify-content-end mt-2">
+
+					<% var declinedMessage = "Please provide information if this request will be decline.." %> 
+					
+					<div class="col-md-7">
+						<textarea
+						    <% if (oneRequest["Finance Approval"] === "Decline"){ %>
+							readonly
+							<% } %>
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							rows="3"
+						    placeholder="<%= declinedMessage %>"
+						    name="declinedMessage"
+						><%= oneRequest["Declined Message"] %></textarea>
+					</div>
+					
+				</div>
+				<% } %>
+				
+				
+				
 				<% if (oneRequest["Finance Approval"] === ""){ %>
 				<div class="float-end mt-2">
 					<button type="submit" class="btn btn-secondary">Submit</button>

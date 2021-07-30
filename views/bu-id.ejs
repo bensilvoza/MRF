@@ -86,9 +86,7 @@
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 				
 				<li><a class="dropdown-item" href="/bu-id/<%= sendOneRequest["ID"] %>">Refresh page</a></li>
-				<% if (sendOneRequest["Ceo Approval"] !== "Approve"){ %>
-				   <li><a class="dropdown-item" href="/bu-edit/<%= sendOneRequest["ID"] %>">Edit request</a></li>
-				<% } %>
+				
 				<!-- <li><a class="dropdown-item" href="#">Another action</a></li>
 				<li><a class="dropdown-item" href="#">Something else here</a></li> -->
 				
@@ -504,6 +502,30 @@
 						
 					</div>
 				</div>
+				
+				
+				<% if (sendOneRequest["Bu Approval"] === "" || sendOneRequest["Bu Approval"] === "Decline"){ %>
+				<div class="row justify-content-end mt-2">
+
+					<% var declinedMessage = "Please provide information if this request will be decline.." %> 
+					
+					<div class="col-md-7">
+						<textarea
+						    <% if (sendOneRequest["Bu Approval"] === "Decline"){ %>
+							readonly
+							<% } %>
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							rows="3"
+						    placeholder="<%= declinedMessage %>"
+						    name="declinedMessage"
+						><%= sendOneRequest["Declined Message"] %></textarea>
+					</div>
+					
+				</div>
+				<% } %>
+				
+				
 				
 				<% if (sendOneRequest["Bu Approval"] === ""){ %>
 				<div class="float-end mt-2">

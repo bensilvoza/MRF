@@ -88,6 +88,8 @@ var requestsSchema = new mongoose.Schema({
 	'Email of The Requestor': String,
 	'Email of The Bu': String,
 	'Date Requested': String,
+	
+	"Declined Message": String,
 
 	'Bu Approval': String,
 	"Finance Approval": String,
@@ -653,6 +655,9 @@ app.post('/requestor-create', function (req, res) {
 			'Email of The Requestor': req.session.email,
 			'Email of The Bu': req.session.emailofTheBu,
 			'Date Requested': date,
+			
+			"Declined Message": "",
+			
 			'Bu Approval': '',
 			"Finance Approval": "",
 			'Hr Approval': '',
@@ -1283,6 +1288,7 @@ app.put('/bu-id/:id', function (req, res) {
 		requestorEmailDeclined = oneRequest['Email of The Requestor'];
 
 		oneRequest['Bu Approval'] = req.body.buApproval;
+		oneRequest['Declined Message'] = req.body.declinedMessage;
 
 		//Callback 2
 		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error, oneRequest) {
@@ -1379,7 +1385,7 @@ app.put('/bu-id/:id', function (req, res) {
 
 
 // edit, bu side
-app.get("/bu-edit/:id", function (req, res){
+app.get("/bu-edittt/:id", function (req, res){
 	
 	var paramsUrl = req.params.id
 	
@@ -1684,6 +1690,7 @@ app.put('/finance-id/:id', function (req, res) {
 		buEmailDeclined = oneRequest['Email of The Bu'];
 
 		oneRequest['Finance Approval'] = req.body.financeApproval;
+		oneRequest['Declined Message'] = req.body.declinedMessage;
 
 		//Update the selected request
 		//Callback 2
@@ -1954,6 +1961,7 @@ app.put('/hr-id/:id', function (req, res) {
 		buEmailDeclined = oneRequest['Email of The Bu'];
 
 		oneRequest['Hr Approval'] = req.body.hrApproval;
+		oneRequest['Declined Message'] = req.body.declinedMessage;
 
 		//Update the selected request
 		//Callback 2
@@ -2238,6 +2246,7 @@ app.put('/ceo-id/:id', function (req, res) {
 
 		//Update from approval
 		oneRequest['Ceo Approval'] = req.body.ceoApproval;
+		oneRequest['Declined Message'] = req.body.declinedMessage;
 
 		//Callback 2
 		Requests.findOneAndUpdate({ ID: paramsUrl }, oneRequest, function (error) {

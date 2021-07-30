@@ -487,7 +487,7 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= oneRequest["Bu Approval"] %>"
+							value="<%= oneRequest["Hr Approval"] %>"
 						/>
 						<% } %>
 						
@@ -496,13 +496,36 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= oneRequest["Bu Approval"] %>"
+							value="<%= oneRequest["Hr Approval"] %>"
 						/>
 						<% } %>
 						
 						
 					</div>
 				</div>
+				
+				<% if (oneRequest["Hr Approval"] === "" || oneRequest["Hr Approval"] === "Decline"){ %>
+				<div class="row justify-content-end mt-2">
+
+					<% var declinedMessage = "Please provide information if this request will be decline.." %> 
+					
+					<div class="col-md-7">
+						<textarea
+						    <% if (oneRequest["Hr Approval"] === "Decline"){ %>
+							readonly
+							<% } %>
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							rows="3"
+						    placeholder="<%= declinedMessage %>"
+						    name="declinedMessage"
+						><%= oneRequest["Declined Message"] %></textarea>
+					</div>
+					
+				</div>
+				<% } %>
+				
+				
 				
 				<% if (oneRequest["Hr Approval"] === ""){ %>
 				<div class="float-end mt-2">
