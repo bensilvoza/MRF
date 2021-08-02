@@ -240,28 +240,28 @@
 						<% if (oneRequest["Bu Approval"] === ""){ %>
 							   <% var buStatus = "Bu: " + "Pending" %>
 						<% } else { %>
-						       <% var buStatus = "Bu: " + oneRequest["Bu Approval"] %>
+						       <% var buStatus = "Bu: " + oneRequest["Bu Approval"] + "d" %>
 						<% } %>
 					
 					    <!-- Finance status -->
 						<% if (oneRequest["Finance Approval"] === ""){ %>
 							   <% var financeStatus = "Finance: " + "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = "Finance: " + oneRequest["Finance Approval"] %>
+						       <% var financeStatus = "Finance: " + oneRequest["Finance Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Hr status -->
 						<% if (oneRequest["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Hr: " + "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = "Hr: " + oneRequest["Hr Approval"] %>
+						       <% var hrStatus = "Hr: " + oneRequest["Hr Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (oneRequest["Ceo Approval"] === ""){ %>
 							   <% var ceoStatus = "Ceo: " + "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = "Ceo: " + oneRequest["Ceo Approval"] %>
+						       <% var ceoStatus = "Ceo: " + oneRequest["Ceo Approval"] + "d" %>
 						<% } %>
 						
 						<!-- If bu status is decline -->

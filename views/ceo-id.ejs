@@ -128,28 +128,28 @@
 						<% if (oneRequest["Bu Approval"] === ""){ %>
 							   <% var buStatus = "Pending" %>
 						<% } else { %>
-						       <% var buStatus = oneRequest["Bu Approval"] %>
+						       <% var buStatus = oneRequest["Bu Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Finance status -->
 						<% if (oneRequest["Finance Approval"] === ""){ %>
 							   <% var financeStatus = "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = oneRequest["Finance Approval"] %>
+						       <% var financeStatus = oneRequest["Finance Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Hr status -->
 						<% if (oneRequest["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = oneRequest["Hr Approval"] %>
+						       <% var hrStatus = oneRequest["Hr Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (oneRequest["Ceo Approval"] === ""){ %>
 							   <% var ceoStatus = "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = oneRequest["Ceo Approval"] %>
+						       <% var ceoStatus = oneRequest["Ceo Approval"] + "d" %>
 						<% } %>
 						
 						<!-- If bu status is decline -->
@@ -487,7 +487,7 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= oneRequest["Ceo Approval"] %>"
+							value="<%= oneRequest["Ceo Approval"] %>d"
 						/>
 						<% } %>
 						
@@ -496,7 +496,7 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= oneRequest["Ceo Approval"] %>"
+							value="<%= oneRequest["Ceo Approval"] %>d"
 						/>
 						<% } %>
 						

@@ -253,7 +253,7 @@
 						<% if (requestorData["Bu Approval"] === ""){ %>
 							   <% var buStatus = "Bu: " + "Pending" %>
 						<% } else { %>
-						       <% var buStatus = "Bu: " + requestorData["Bu Approval"] %>
+						       <% var buStatus = "Bu: " + requestorData["Bu Approval"] + "d" %>
 						<% } %>
 					
 					    
@@ -261,7 +261,7 @@
 						<% if (requestorData["Finance Approval"] === ""){ %>
 							   <% var financeStatus = "Finance: " + "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = "Finance: " + requestorData["Finance Approval"] %>
+						       <% var financeStatus = "Finance: " + requestorData["Finance Approval"] + "d" %>
 						<% } %>
 					
 						
@@ -269,14 +269,14 @@
 						<% if (requestorData["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Hr: " + "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = "Hr: " + requestorData["Hr Approval"] %>
+						       <% var hrStatus = "Hr: " + requestorData["Hr Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (requestorData["Ceo Approval"] === ""){ %>
 							   <% var ceoStatus = "Ceo: " + "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = "Ceo: " + requestorData["Ceo Approval"] %>
+						       <% var ceoStatus = "Ceo: " + requestorData["Ceo Approval"] + "d" %>
 						<% } %>
 						
 					

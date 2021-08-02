@@ -127,28 +127,28 @@
 						<% if (sendOneRequest["Bu Approval"] === ""){ %>
 							   <% var buStatus = "Pending" %>
 						<% } else { %>
-						       <% var buStatus = sendOneRequest["Bu Approval"] %>
+						       <% var buStatus = sendOneRequest["Bu Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Finance status -->
 						<% if (sendOneRequest["Finance Approval"] === ""){ %>
 							   <% var financeStatus = "Pending" %>
 						<% } else { %>
-						       <% var financeStatus = sendOneRequest["Finance Approval"] %>
+						       <% var financeStatus = sendOneRequest["Finance Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Hr status -->
 						<% if (sendOneRequest["Hr Approval"] === ""){ %>
 							   <% var hrStatus = "Pending" %>
 						<% } else { %>
-						       <% var hrStatus = sendOneRequest["Hr Approval"] %>
+						       <% var hrStatus = sendOneRequest["Hr Approval"] + "d" %>
 						<% } %>
 						
 						<!-- Ceo status -->
 						<% if (sendOneRequest["Ceo Approval"] === ""){ %>
 							   <% var ceoStatus = "Pending" %>
 						<% } else { %>
-						       <% var ceoStatus = sendOneRequest["Ceo Approval"] %>
+						       <% var ceoStatus = sendOneRequest["Ceo Approval"] + "d" %>
 						<% } %>
 						
 						<!-- If bu status is decline -->
@@ -486,7 +486,7 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= sendOneRequest["Bu Approval"] %>"
+							value="<%= sendOneRequest["Bu Approval"] %>d"
 						/>
 						<% } %>
 						
@@ -495,7 +495,7 @@
 							readonly
 							class="form-control form-control-lg"
 							type="text"
-							value="<%= sendOneRequest["Bu Approval"] %>"
+							value="<%= sendOneRequest["Bu Approval"] %>d"
 						/>
 						<% } %>
 						
