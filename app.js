@@ -1843,7 +1843,7 @@ app.get('/hr-s-pending', function (req, res) {
 		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
-			if (oneRequest['Bu Approval'] === 'Approve') {
+			if (oneRequest['Finance Approval'] === 'Approve') {
 				if (oneRequest['Hr Approval'] === '') {
 					hrRequests.push(oneRequest);
 				}
@@ -1867,7 +1867,7 @@ app.get('/hr-s-approved', function (req, res) {
 		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
-			if (oneRequest['Bu Approval'] === 'Approve') {
+			if (oneRequest['Finance Approval'] === 'Approve') {
 				if (oneRequest['Hr Approval'] === 'Approve') {
 					hrRequests.push(oneRequest);
 				}
@@ -1891,7 +1891,7 @@ app.get('/hr-s-declined', function (req, res) {
 		if (error) return res.redirect('/');
 
 		for (var oneRequest of allRequest) {
-			if (oneRequest['Bu Approval'] === 'Approve') {
+			if (oneRequest['Finance Approval'] === 'Approve') {
 				if (oneRequest['Hr Approval'] === 'Decline') {
 					hrRequests.push(oneRequest);
 				}

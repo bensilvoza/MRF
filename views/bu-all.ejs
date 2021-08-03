@@ -201,6 +201,13 @@
 				
 				
 			</div>
+			  
+			
+			<!-- if folder is empty -->
+			<% if (sendManyRequest.length === 0){ %>
+			       <h6 class="text-center mt-5"><em>Your folder is empty</em></h6>
+			<% } %>
+			
 			
 			<% for (var oneRequest of sendManyRequest){ %>
 			
