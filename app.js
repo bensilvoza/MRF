@@ -473,7 +473,7 @@ app.get('/requestor-create', function (req, res) {
 app.post('/requestor-create', function (req, res) {
 	
 	var requiredFields = false;
-	
+
 	
 	
 	// tools needed
@@ -547,7 +547,7 @@ app.post('/requestor-create', function (req, res) {
 		return res.redirect('back');
 	}
 	
-	if (req.body.headcount === 'Choose number of headcount...') {
+	if (req.body.headcount === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
