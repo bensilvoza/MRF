@@ -444,6 +444,19 @@ app.get('/register', function (req, res) {
 });
 
 app.post('/register', function (req, res) {
+	
+	// check if he / she already registered
+	Register.find({}, function (error, users){
+		if (error) return res.redirect("back")
+		
+		// check if he / she already registered
+		for (var user of users){
+		     if (user["email"] === req.body.email){
+				 return res.redirect("back")
+			 }
+		}
+		
+		
 	//Check if the inputed email is found on save all users database
 	//Callback 1
 	Official.find({}, function (error, roles) {
@@ -506,6 +519,12 @@ app.post('/register', function (req, res) {
 		});
 	});
 	//End of callback 1
+		
+		
+		
+	})
+	
+	
 });
 
 //================================================
