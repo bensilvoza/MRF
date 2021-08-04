@@ -1272,7 +1272,17 @@ app.get('/bu-id/:id', function (req, res) {
 //Update
 app.put('/bu-id/:id', function (req, res) {
 	var paramsUrl = req.params.id;
+	
+	// check if approval is approve or decline
+	if (req.body.buApproval === "Approve or Decline...") return res.redirect("back")
+	
+	// if decline, check if declined message is empty
+	if (req.body.buApproval === "Decline"){
+		if (req.body.declinedMessage === "") return res.redirect("back")
+	}
+	
 
+	
 	//Pull up requestor email, if request is declined
 	var requestorEmailDeclined = undefined;
 
@@ -1678,6 +1688,15 @@ app.get('/finance-id/:id', function (req, res) {
 //Update
 app.put('/finance-id/:id', function (req, res) {
 	var paramsUrl = req.params.id;
+	
+	// check if approval is approve or decline
+	if (req.body.financeApproval === "Approve or Decline...") return res.redirect("back")
+	
+	// if decline, check if declined message is empty
+	if (req.body.financeApproval === "Decline"){
+		if (req.body.declinedMessage === "") return res.redirect("back")
+	}
+	
 
 	//Pull up the email of requestor and bu, declined purposes
 	var requestorEmailDeclined = undefined;
@@ -1949,6 +1968,15 @@ app.get('/hr-id/:id', function (req, res) {
 //Update
 app.put('/hr-id/:id', function (req, res) {
 	var paramsUrl = req.params.id;
+	
+	// check if approval is approve or decline
+	if (req.body.hrApproval === "Approve or Decline...") return res.redirect("back")
+	
+	// if decline, check if declined message is empty
+	if (req.body.hrApproval === "Decline"){
+		if (req.body.declinedMessage === "") return res.redirect("back")
+	}
+	
 
 	//Pull up the email of requestor and bu, declined purposes
 	var requestorEmailDeclined = undefined;
@@ -2233,6 +2261,16 @@ app.get('/ceo-id/:id', function (req, res) {
 //Update
 app.put('/ceo-id/:id', function (req, res) {
 	var paramsUrl = req.params.id;
+	
+	// check if approval is approve or decline
+	if (req.body.ceoApproval === "Approve or Decline...") return res.redirect("back")
+	
+	// if decline, check if declined message is empty
+	if (req.body.ceoApproval === "Decline"){
+		if (req.body.declinedMessage === "") return res.redirect("back")
+	}
+	
+	
 
 	//Temporary save the oneRequest data to pull up requestor and bu email
 	var requestorEmail = undefined;
