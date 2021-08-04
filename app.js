@@ -159,7 +159,7 @@ app.post('/administrator', function (req, res) {
 
 	if (hashing(req.body.key) === key) {
 		req.session.officialOpen = true;
-		res.redirect('/official');
+		res.redirect('/official-main');
 	} else {
 		console.log('Incorrect key');
 		res.redirect('back');
@@ -254,6 +254,67 @@ app.post('/login', function (req, res) {
 	//End of callback 1
 });
 
+
+//Official users page
+app.get('/official-main', function (req, res) {
+	//Go to session and check if you are authorize to enter
+	if (req.session.officialOpen === undefined) return res.redirect('/');
+	
+	
+	// callback 1
+	Official.find({}, function (error, officials){
+		if (error) return res.redirect("/")
+		
+		// data of every department
+	    // pull up requestor and bu
+		var departmentUsers = []
+		for (var official of officials){
+			 if (official["Requestor role"] === "true"){
+				 departmentUsers.push (official)
+			 }
+		}
+		
+		
+		// finance controller data
+		var financeUsers = []
+		for (var official of officials){
+			 if (official["Finance role"] === "true"){
+				 financeUsers.push (official)
+			 }
+		}
+		
+		
+		// hr data
+		var hrUsers = []
+		for (var official of officials){
+			 if (official["Hr role"] === "true"){
+				 hrUsers.push (official)
+			 }
+		}
+		
+		
+		// ceo data
+		var ceoMail
+		for (var official of officials){
+			 if (official["Ceo role"] === "true"){
+				 ceoMail = official["Email"]
+			 }
+		}
+		
+		
+		res.render ("official-main",
+					{
+			         "departmentUsers": departmentUsers,
+					 "financeUsers": financeUsers,
+			         "hrUsers": hrUsers,
+			         "ceoMail": ceoMail
+		             }
+		)
+		
+	})
+});
+
+
 //The very first time save all official users
 app.get('/official', function (req, res) {
 	//Go to session and check if you are authorize to enter
@@ -262,7 +323,17 @@ app.get('/official', function (req, res) {
 });
 
 app.post('/official', function (req, res) {
-	//Role data
+	
+	// check if email is already present in the Official DB
+	Official.find({}, function (error, checkUsers){
+		if (error) return res.redirect("back")
+		
+		for (var checkUser of checkUsers){
+			if (checkUser["Email"] === req.body.email) return res.redirect("back")
+		}
+		
+		
+		//Role data
 	var roleInput = {
 		id: iid(),
 		email: req.body.email,
@@ -305,6 +376,10 @@ app.post('/official', function (req, res) {
 			res.redirect('/official-submitted');
 		}
 	});
+		
+  })
+	
+	
 });
 
 //access submitted
