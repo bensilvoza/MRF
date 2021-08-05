@@ -905,25 +905,39 @@ app.get('/requestor-s-declined', function (req, res) {
 
 //Search, requestor side
 app.get('/requestor-search/', function (req, res) {
-	var searchID = undefined;
+	
+	//pull up all data associated with this email, from Requests database
+	var requestorDataAll = [];
 
-	//Find the single request from the keyword provided
-	Requests.find({}, function (error, allRequest) {
+	//Callback 1
+	Requests.find({}, function (error, getRequests) {
 		//If there's potential error
 		if (error) return res.redirect('/');
 
-		//Accept ID
-		for (var oneRequest of allRequest) {
-			if (req.query.searchID === oneRequest['ID']) {
+		for (var getRequest of getRequests) {
+			if (getRequest['Email of The Requestor'] === req.session.email) {
+				requestorDataAll.push(getRequest);
+			}
+		}
+		
+		var searchID = undefined;
+		
+		// loop the requestorDataAll
+		for (var oneRequest of requestorDataAll){
+			 if (req.query.searchID === oneRequest['ID']) {
 				searchID = oneRequest['ID'];
 				break;
 			}
 		}
-
+		
 		if (searchID === undefined) return res.redirect('back');
-
+		
+		
 		res.redirect('/requestor-id/' + searchID);
+
 	});
+	//End of callback 1
+	
 });
 
 //Show one request, requestor side
@@ -1317,25 +1331,37 @@ app.get('/bu-s-declined', function (req, res) {
 
 //Search, bu side
 app.get('/bu-search/', function (req, res) {
-	var searchID = undefined;
+	
+	var sendManyRequest = [];
 
-	//Find the single request from the keyword provided
+	//Find all the request, Bu side
+	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
 		if (error) return res.redirect('/');
 
-		//Accept ID
 		for (var oneRequest of allRequest) {
-			if (req.query.searchID === oneRequest['ID']) {
+			if (req.session.email === oneRequest['Email of The Bu']) {
+				sendManyRequest.push(oneRequest);
+			}
+		}
+		
+		var searchID = undefined;
+		
+		for (var oneRequest of sendManyRequest){
+			 if (req.query.searchID === oneRequest['ID']) {
 				searchID = oneRequest['ID'];
 				break;
 			}
 		}
-
+		
 		if (searchID === undefined) return res.redirect('back');
-
+		
 		res.redirect('/bu-id/' + searchID);
+
 	});
+	//End of callback 1
+	
 });
 
 //Show one request, Bu side
@@ -1740,25 +1766,34 @@ app.get('/finance-s-declined', function (req, res) {
 
 //Search, finance side
 app.get('/finance-search/', function (req, res) {
-	var searchID = undefined;
+	
+	var financeRequests = [];
 
-	//Find the single request from the keyword provided
+	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
 		if (error) return res.redirect('/');
 
-		//Accept ID
 		for (var oneRequest of allRequest) {
-			if (req.query.searchID === oneRequest['ID']) {
+			if (oneRequest['Bu Approval'] === 'Approve') {
+				financeRequests.push(oneRequest);
+			}
+		}
+
+		var searchID = undefined;
+		
+		for (var oneRequest of financeRequests){
+			 if (req.query.searchID === oneRequest['ID']) {
 				searchID = oneRequest['ID'];
 				break;
 			}
 		}
-
+		
 		if (searchID === undefined) return res.redirect('back');
-
-		res.redirect('/finance-id/' + searchID);
+		
+        res.redirect('/finance-id/' + searchID);
 	});
+	
 });
 
 //show one request, finance side
@@ -2020,25 +2055,35 @@ app.get('/hr-s-declined', function (req, res) {
 
 //Search, hr side
 app.get('/hr-search/', function (req, res) {
-	var searchID = undefined;
+	
+	var hrRequests = [];
 
-	//Find the single request from the keyword provided
+	//Callback 1
 	Requests.find({}, function (error, allRequest) {
 		//If there's potential error
 		if (error) return res.redirect('/');
 
-		//Accept ID
 		for (var oneRequest of allRequest) {
-			if (req.query.searchID === oneRequest['ID']) {
+			if (oneRequest['Finance Approval'] === 'Approve') {
+				hrRequests.push(oneRequest);
+			}
+		}
+
+		var searchID = undefined;
+		
+		for (var oneRequest of hrRequests){
+			 if (req.query.searchID === oneRequest['ID']) {
 				searchID = oneRequest['ID'];
 				break;
 			}
 		}
-
+		
 		if (searchID === undefined) return res.redirect('back');
-
+		
 		res.redirect('/hr-id/' + searchID);
+		
 	});
+	
 });
 
 //show one request, hr side
@@ -2313,25 +2358,36 @@ app.get('/ceo-s-declined', function (req, res) {
 
 //Search, ceo side
 app.get('/ceo-search/', function (req, res) {
-	var searchID = undefined;
-
-	//Find the single request from the keyword provided
+	
+	//Callback 1
 	Requests.find({}, function (error, allRequest) {
+		
+		var ceoRequests = [];
+
 		//If there's potential error
 		if (error) return res.redirect('/');
 
-		//Accept ID
 		for (var oneRequest of allRequest) {
-			if (req.query.searchID === oneRequest['ID']) {
+			if (oneRequest['Hr Approval'] === 'Approve') {
+				ceoRequests.push(oneRequest);
+			}
+		}
+
+		var searchID = undefined;
+		
+		for (var oneRequest of ceoRequests){
+			 if (req.query.searchID === oneRequest['ID']) {
 				searchID = oneRequest['ID'];
 				break;
 			}
 		}
-
+		
 		if (searchID === undefined) return res.redirect('back');
-
-		res.redirect('/ceo-id/' + searchID);
+		
+        res.redirect('/ceo-id/' + searchID);
 	});
+	//End of callback 1
+	
 });
 
 //show
