@@ -914,6 +914,18 @@ app.get('/requestor-s-declined', function (req, res) {
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
+				if (getRequest['Bu Approval'] === 'Decline') {
+					requestorDataAll.push(getRequest);
+				}
+				
+				if (getRequest['Finance Approval'] === 'Decline') {
+					requestorDataAll.push(getRequest);
+				}
+				
+				if (getRequest['Hr Approval'] === 'Decline') {
+					requestorDataAll.push(getRequest);
+				}
+				
 				if (getRequest['Ceo Approval'] === 'Decline') {
 					requestorDataAll.push(getRequest);
 				}
