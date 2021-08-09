@@ -77,11 +77,13 @@ var requestsSchema = new mongoose.Schema({
 	"Number of Headcount": String,
 	"Date Needed": String,
 	'Place of Assignment': String,
-	'Tools Needed': String,
 	'Breif Description of The Job': String,
+	"Minimum years of relevant experience": String,
 	'Educational Degree': String,
 	'Specific Characteristic': String,
 	'Type of Employment': String,
+	"Justification": String,
+	'Tools Needed': String,
 	'Type of Request': String,
 	Remarks: String,
 
@@ -604,11 +606,13 @@ app.post('/requestor-create', function (req, res) {
 		headcount: req.body.headcount,
 		dateNeeded: req.body.dateNeeded,
 		placeAssignment: req.body.placeAssignment,
-		tools: toolsNeeded,
+		tools: req.body.tools,
 		descriptionJob: req.body.descriptionJob,
+		yearsOfExperience: req.body.yearsOfExperience,
 		educationalDegree: req.body.educationalDegree,
 		specificCharacteristic: req.body.specificCharacteristic,
 		typeEmployment: req.body.typeEmployment,
+		justification: req.body.justification,
 		typeRequest: req.body.typeRequest,
 		remarks: req.body.remarks,
 	};
@@ -656,12 +660,17 @@ app.post('/requestor-create', function (req, res) {
 		return res.redirect('back');
 	}
 	
-	if (requestorInput["tools"] === '') {
+	if (req.body.tools === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
 	
 	if (req.body.descriptionJob === empty) {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.yearsOfExperience === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
@@ -677,6 +686,11 @@ app.post('/requestor-create', function (req, res) {
 	}
 	
 	if (req.body.typeEmployment === 'Choose type of employment...') {
+		req.session.emptyFieldsFaker = true;
+		return res.redirect('back');
+	}
+	
+	if (req.body.justification === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}
@@ -740,9 +754,11 @@ app.post('/requestor-create', function (req, res) {
 			'Place of Assignment': requestorInput['placeAssignment'],
 			'Tools Needed': requestorInput['tools'],
 			'Breif Description of The Job': requestorInput['descriptionJob'],
+			"Minimum years of relevant experience": requestorInput['yearsOfExperience'],
 			'Educational Degree': requestorInput['educationalDegree'],
 			'Specific Characteristic': requestorInput['specificCharacteristic'],
 			'Type of Employment': requestorInput['typeEmployment'],
+			"Justification": requestorInput['justification'],
 			'Type of Request': requestorInput['typeRequest'],
 			Remarks: requestorInput['remarks'],
 
@@ -846,8 +862,14 @@ app.get('/requestor-s-pending', function (req, res) {
 
 		for (var getRequest of getRequests) {
 			if (getRequest['Email of The Requestor'] === req.session.email) {
-				if (getRequest['Ceo Approval'] === '') {
-					requestorDataAll.push(getRequest);
+				if (getRequest['Bu Approval'] !== 'Decline') {
+					if (getRequest['Finance Approval'] !== 'Decline') {
+					    if (getRequest['Hr Approval'] !== 'Decline') {
+					        if (getRequest['Ceo Approval'] === '') {
+					            requestorDataAll.push(getRequest);
+				            }
+				        }
+				    }
 				}
 			}
 		}

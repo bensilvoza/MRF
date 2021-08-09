@@ -370,7 +370,26 @@
 							class="form-control"
 							id="exampleFormControlTextarea1"
 							rows="8"
-						> <%= oneRequest["Breif Description of The Job"] %> </textarea>
+						> <%= oneRequest["Brief Description of The Job"] %> </textarea>
+					</div>
+				</div>
+				
+				<div class="row justify-content-end mt-4">
+					<div class="col-md-3">
+						<h6>
+							Minimum years of relevant experience
+						</h6>
+					</div>
+
+					<div class="col-md-7">
+						<div class="form-group">
+							<input
+								readonly
+								class="form-control form-control-lg"
+								type="text"
+								value="<%= oneRequest["Minimum years of relevant experience"] %>"
+							/>
+						</div>
 					</div>
 				</div>
 
@@ -424,6 +443,24 @@
 							/>
 					</div>
 				</div>
+				
+				<div class="row justify-content-end mt-4">
+					<div class="col-md-3">
+						<h6>
+							Justification
+						</h6>
+					</div>
+
+					<div class="col-md-7">
+						<textarea
+							readonly	  
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							rows="8"
+						> <%= oneRequest["Justification"] %> </textarea>
+					</div>
+				</div>
+				
 
 				<div class="row justify-content-end mt-4">
 					<div class="col-md-3">
@@ -508,7 +545,7 @@
 				<% if (oneRequest["Ceo Approval"] === "" || oneRequest["Ceo Approval"] === "Decline"){ %>
 				<div class="row justify-content-end mt-2">
 
-					<% var declinedMessage = "Please provide information if this request will be decline.." %> 
+					<% var declinedMessage = "Please provide information if this request will be declined.." %> 
 					
 					<div class="col-md-7">
 						<textarea

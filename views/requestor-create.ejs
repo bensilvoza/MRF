@@ -297,47 +297,12 @@
 						</div>
 					</div>
 
-					<div class="row justify-content-end mt-4">
-						<div class="col-md-3">
-							<h6>
-								Tools Needed  *
-							</h6>
-						</div>
-
-						<div class="col-md-7">
-							<!-- <select name="tools" class="form-control form-control-lg">
-								<option>Choose the tools needed...</option>
-								<option>PPE</option>
-								<option>Laptop</option>
-								<option>Desktop</option>
-								<option>Office 365 account</option>
-							</select> -->
-							
-							<div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="ppe" value="PPE">
-                              <label class="form-check-label" for="inlineCheckbox1">PPE</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="laptop" value="Laptop">
-                              <label class="form-check-label" for="inlineCheckbox2">Laptop</label>
-                            </div>                            
-							<div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="desktop" value="Desktop">
-                              <label class="form-check-label" for="inlineCheckbox2">Desktop</label>
-                            </div>
-							<div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="office" value="Office 365 account">
-                              <label class="form-check-label" for="inlineCheckbox2">Office 365 account</label>
-                            </div>
-							
-							
-						</div>
-					</div>
+					
 
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
 							<h6>
-								Breif Description of the Job  *
+								Brief Description of the Job  *
 							</h6>
 						</div>
 
@@ -350,6 +315,25 @@
 							></textarea>
 						</div>
 					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Minimum years of relevant experience *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<div class="form-group">
+								<input
+									class="form-control form-control-lg"
+									type="text"
+									name="yearsOfExperience"
+								/>
+							</div>
+						</div>
+					</div>
+					
 
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
@@ -401,6 +385,74 @@
 							</select>
 						</div>
 					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Justification  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<textarea
+								class="form-control"
+								id="exampleFormControlTextarea1"
+								rows="8"
+								name="justification"
+							    placeholder="A. Replacement due to:
+	Resignation (Name of outgoing Employee)
+        Transfer/ Movement (Name of the transferred Employee)
+C. Additional Manpower (Reason and attach updated table of organization)"
+							></textarea>
+						</div>
+					</div>
+					
+					<div class="row justify-content-end mt-4">
+						<div class="col-md-3">
+							<h6>
+								Tools Needed  *
+							</h6>
+						</div>
+
+						<div class="col-md-7">
+							<!-- <select name="tools" class="form-control form-control-lg">
+								<option>Choose the tools needed...</option>
+								<option>PPE</option>
+								<option>Laptop</option>
+								<option>Desktop</option>
+								<option>Office 365 account</option>
+							</select> -->
+							
+							<!-- <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="ppe" value="PPE">
+                              <label class="form-check-label" for="inlineCheckbox1">PPE</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="laptop" value="Laptop">
+                              <label class="form-check-label" for="inlineCheckbox2">Laptop</label>
+                            </div>                            
+							<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="desktop" value="Desktop">
+                              <label class="form-check-label" for="inlineCheckbox2">Desktop</label>
+                            </div>
+							<div class="form-check form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="office" value="Office 365 account">
+                              <label class="form-check-label" for="inlineCheckbox2">Office 365 account</label>
+                            </div> -->
+							
+							
+							<div class="form-group">
+								<textarea
+								  class="form-control"
+								  id="exampleFormControlTextarea1"
+								  rows="4"
+								  placeholder="Laptop, Desktop, Office 365 account"
+								  name="tools"
+							     ></textarea>
+							</div>
+						</div>
+					</div>
+					
 
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-3">
@@ -437,9 +489,9 @@
 					
 					<div class="row justify-content-end mt-4">
 						<div class="col-md-10">
-							<h6>
-								( Field with asterisk is required )
-							</h6>
+							<p>
+								<em>( Field with asterisk is required )</em>
+							</p>
 						</div>
 					</div>
 					

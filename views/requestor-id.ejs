@@ -399,7 +399,7 @@
 				<div class="row justify-content-end mt-4">
 					<div class="col-md-3">
 						<h6>
-							Breif Description of The Job
+							Brief Description of The Job
 						</h6>
 					</div>
 
@@ -410,6 +410,25 @@
 							id="exampleFormControlTextarea1"
 							rows="8"
 						> <%= sendOneRequest["Breif Description of The Job"] %> </textarea>
+					</div>
+				</div>
+				
+				<div class="row justify-content-end mt-4">
+					<div class="col-md-3">
+						<h6>
+							Minimum years of relevant experience *
+						</h6>
+					</div>
+
+					<div class="col-md-7">
+						<div class="form-group">
+							<input
+								readonly
+								class="form-control form-control-lg"
+								type="text"
+								value="<%= sendOneRequest["Minimum years of relevant experience"] %>"
+							/>
+						</div>
 					</div>
 				</div>
 
@@ -463,6 +482,24 @@
 							/>
 					</div>
 				</div>
+				
+				<div class="row justify-content-end mt-4">
+					<div class="col-md-3">
+						<h6>
+							Justification
+						</h6>
+					</div>
+
+					<div class="col-md-7">
+						<textarea
+							readonly	  
+							class="form-control"
+							id="exampleFormControlTextarea1"
+							rows="8"
+						> <%= sendOneRequest["Justification"] %> </textarea>
+					</div>
+				</div>
+				
 
 				<div class="row justify-content-end mt-4">
 					<div class="col-md-3">
