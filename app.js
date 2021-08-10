@@ -685,7 +685,7 @@ app.post('/requestor-create', function (req, res) {
 		return res.redirect('back');
 	}
 	
-	if (req.body.typeEmployment === 'Choose type of employment...') {
+	if (req.body.typeEmployment === empty) {
 		req.session.emptyFieldsFaker = true;
 		return res.redirect('back');
 	}

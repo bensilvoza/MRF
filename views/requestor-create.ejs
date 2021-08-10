@@ -271,6 +271,7 @@
 								<input
 									class="form-control form-control-lg"
 									type="text"
+									placeholder="MM-DD-YYYY"
 									name="dateNeeded"
 								/>
 							</div>
@@ -376,13 +377,26 @@
 							</h6>
 						</div>
 
+						
 						<div class="col-md-7">
-							<select name="typeEmployment" class="form-control form-control-lg">
+							<div class="form-group">
+								<textarea
+								  class="form-control"
+								  id="exampleFormControlTextarea1"
+								  rows="4"
+								  placeholder="A. Full time
+B. Agency-hire
+C. Project-based    ( Start date:   End date:   )"
+								  name="typeEmployment"
+							     ></textarea>
+							</div>
+							
+							<!-- <select name="typeEmployment" class="form-control form-control-lg">
 								<option>Choose type of employment...</option>
 								<option>Full-Time</option>
 								<option>Agent Hire / Outsource</option>
 								<option>Project-Based</option>
-							</select>
+							</select> -->
 						</div>
 					</div>
 					
@@ -402,7 +416,8 @@
 							    placeholder="A. Replacement due to:
 	Resignation (Name of outgoing Employee)
         Transfer/ Movement (Name of the transferred Employee)
-C. Additional Manpower (Reason and attach updated table of organization)"
+C. Additional Manpower (Reason and kindly provide the link of the updated table of organization
+   or project plan)"
 							></textarea>
 						</div>
 					</div>
