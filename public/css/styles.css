@@ -114,12 +114,12 @@
 
 
 .login-registration-box-mini {
-	background-color: antiquewhite;
     margin-top: 100px;
     padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 40px;
 	padding-bottom: 40px;
+	border: 2px solid black;
 	border-radius: 10px;
 }
 
