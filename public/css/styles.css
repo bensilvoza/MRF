@@ -104,13 +104,24 @@
 
 .login-register-page-header {
 	height: 80px;
-    border: 1px solid slategray;
+    border: 0px solid slategray;
     border-radius: 5px;
     margin-top: 10px;
 	margin-bottom: 90px;
     padding: 10px;
+	background-color: lightsteelblue;
 }
 
+
+.login-registration-box-mini {
+	background-color: lavender;
+    margin-top: 100px;
+    padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-radius: 10px;
+}
 
 
 

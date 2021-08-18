@@ -34,10 +34,12 @@
 		<div class="hide-me">
 			
 			
-			<div class="container">
-				
-			<div class="d-flex align-items-center login-register-page-header">	
-			<!-- back arrow -->
+			<!-- some changes August 18 -->
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="login-registration-box-mini">
+						
+						<!-- back arrow -->
 			<div
 				class="d-inline-block"
 				onclick="location.href='/login';"
@@ -57,25 +59,17 @@
 					/>
 				</svg>
 			</div>
-			
-				
-			</div>
-			</div>	
-			
-			
-
-			<!-- <h2 class="mt-5 text-center">Manpower Requisition Form</h2> -->
-
-			<% if ( !(hideCreateMessage) ){ %>
+						
+						
+						<% if ( !(hideCreateMessage) ){ %>
 			<h2 class="mt-5 text-center">Create Account</h2>
 			<p class="text-center">
 				Create account and approved request.
 			</p>
 			<% } %>
-
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-4">
+						
+					<div class="row justify-content-center">
+					<div class="">
 						<!-- Session for incorrect details -->
 						<% if (incorrectDetails){ %>
 						<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -161,8 +155,27 @@
 						<% } %>
 						
 					</div>
+				</div>	
+						
+						
+						
+						
+						
+					</div>
 				</div>
 			</div>
+			<!-- end some changes August 18 -->
+			
+			
+			
+			
+			
+
+			
+
+			
+
+			
 		</div>
 		<!-- hide-me -->
 
