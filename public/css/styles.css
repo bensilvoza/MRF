@@ -93,12 +93,12 @@
 }
 
 .create-account-login {
-	color: #0c49a3;
+	margin-top: 3px;
+	color: #7851a9;
 }
 
 .create-account-login:hover {
-	border-bottom: 1px solid #0c49a3;
-	margin-top: 3px;
+	border-bottom: 1px solid #7851a9;
 	
 }
 
@@ -119,9 +119,8 @@
 	padding-right: 20px;
 	padding-top: 40px;
 	padding-bottom: 40px;
-	border: 2px solid black;
+	border: 2px solid #7851a9;
 	border-radius: 10px;
-	background-color: whitesmoke;
 }
 
 
