@@ -77,6 +77,19 @@
 	color: white;
 }
 
+.go-to-request {
+	font-size: 20px;
+	color: #7851a9;
+	margin-top: 30px;
+	cursor: pointer;
+}
+
+.go-to-request:hover {
+	color: #7851a9;
+	border-bottom: 1px dashed #7851a9;
+	
+}
+
 
 
 /* login */
@@ -94,11 +107,11 @@
 
 .create-account-login {
 	margin-top: 3px;
-	color: #7851a9;
+	color: gray;
 }
 
 .create-account-login:hover {
-	border-bottom: 1px solid #7851a9;
+	border-bottom: 1px solid gray;
 	
 }
 
@@ -216,7 +229,7 @@
     border-radius: 5px;
     margin-top: 10px;
     padding: 10px;
-    background-color: lightsteelblue;
+    background-color: #3B3C36;
 }
 
 

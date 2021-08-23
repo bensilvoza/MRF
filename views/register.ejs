@@ -32,19 +32,10 @@
 
 		<!-- hide-me -->
 		<div class="hide-me">
-			
-			
 			<!-- some changes August 18 -->
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="login-registration-box-mini">
-						
-						<!-- back arrow -->
-			<div
-				class="d-inline-block"
-				onclick="location.href='/login';"
-				style="cursor: pointer;"
-			>
+
+			<!-- back arrow -->
+			<div class="d-inline-block login-back-arrow" onclick="location.href='/login';" style="cursor: pointer;">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="30"
@@ -59,126 +50,120 @@
 					/>
 				</svg>
 			</div>
-						
-						
-						<% if ( !(hideCreateMessage) ){ %>
-			<h2 class="mt-5 text-center">Create Account</h2>
-			<p class="text-center">
-				Create account and approved request.
-			</p>
+
+			<% if ( !(hideCreateMessage) ){ %>
+			<h2 class="text-center" style="margin-top: 100px; margin-bottom: 20px;">Create Account</h2>
+			
 			<% } %>
-						
-					<div class="row justify-content-center">
-					<div class="">
-						<!-- Session for incorrect details -->
-						<% if (incorrectDetails){ %>
-						<div class="alert alert-danger alert-dismissible fade show" role="alert">
-							Incorrect Details
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="alert"
-								aria-label="Close"
-							></button>
-						</div>
-						<% } %>
-						<!-- End of session for incorrect details -->
 
-						<!-- Session for account successfully created -->
-						<% if (account){ %>
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							Account successfully created!
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="alert"
-								aria-label="Close"
-							></button>
-						</div>
-						<% } %>
-						<!-- End of session for account successfully created -->
-
-						<!-- Session for weak password -->
-						<% if (weakPassword){ %>
-						<div class="alert alert-danger alert-dismissible fade show" role="alert">
-							Password atleast 6 characters long
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="alert"
-								aria-label="Close"
-							></button>
-						</div>
-						<% } %>
-						<!-- End of session for weak password -->
-
-						<% if ( !(hideCreateMessage) ){ %>
-						<form action="/register" method="post" autocomplete="off">
-							<div class="form-group" style="padding-left: 80px; padding-right: 80px;">
-								<input
-									class="form-control form-control-lg"
-									style="border: 1px solid black;"
-									type="text"
-									name="email"
-									placeholder="Email"
-								/>
-							</div>
-
-							<div class="mt-2 form-group" style="padding-left: 80px; padding-right: 80px;">
-								<input
-									class="form-control form-control-lg"
-									style="border: 1px solid black;"
-									type="password"
-									name="password"
-									placeholder="Password"
-								/>
-							</div>
-							<div class="mt-2 form-group" style="padding-left: 80px; padding-right: 80px;">
-								<input
-									class="form-control form-control-lg"
-									style="border: 1px solid black;"
-									type="password"
-									name="confirmPassword"
-									placeholder="Confirm Password"
-								/>
-							</div>
-
-							<div class="d-grid" style="padding-left: 80px; padding-right: 80px;">
-								<button class="mt-2 btn btn-lg btn-dark" type="submit">
-									Create
-								</button>
-							</div>
-						</form>
-						<% } %>
-						
-						<% if ( hideCreateMessage ){ %>
-					    <div class="d-grid">
-							<a href="/login" class="mt-2 btn btn-lg btn-secondary" role="button">Go to Login</a>
-						</div>
-						<% } %>
-						
+			<div class="row justify-content-center">
+				<div class="col-md-3">
+					<!-- Session for incorrect details -->
+					<% if (incorrectDetails){ %>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						Incorrect Details
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="alert"
+							aria-label="Close"
+						></button>
 					</div>
-				</div>	
-						
-						
-						
-						
-						
+					<% } %>
+					<!-- End of session for incorrect details -->
+
+					<!-- Session for account successfully created -->
+					<% if (account){ %>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						Account successfully created!
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="alert"
+							aria-label="Close"
+						></button>
 					</div>
+					<% } %>
+					<!-- End of session for account successfully created -->
+
+					<!-- Session for weak password -->
+					<% if (weakPassword){ %>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						Password atleast 6 characters long
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="alert"
+							aria-label="Close"
+						></button>
+					</div>
+					<% } %>
+					<!-- End of session for weak password -->
+
+					<% if ( !(hideCreateMessage) ){ %>
+					<form action="/register" method="post" autocomplete="off">
+						
+						<p style="color: gray; font-size: 20px; margin-bottom: 5px; margin-left: 10px;">Email Address</p>
+						<div class="form-group">
+							<input
+								class="form-control form-control-lg"
+								style="border: 1px solid gray; border-radius: 50px;"
+								type="text"
+								name="email"
+								
+							/>
+						</div>
+
+						<br>
+						
+						<p style="color: gray; font-size: 20px; margin-bottom: 5px; margin-left: 10px;">Password</p>
+						<div
+							class="form-group"
+							
+						>
+							<input
+								class="form-control form-control-lg"
+								style="border: 1px solid gray; border-radius: 50px;"
+								type="password"
+								name="password"
+								
+							/>
+						</div>
+						
+						<br>
+						
+						<p style="color: gray; font-size: 20px; margin-bottom: 5px; margin-left: 10px;">Confirm Password</p>
+						<div
+							class="form-group"
+							
+						>
+							<input
+								class="form-control form-control-lg"
+								style="border: 1px solid gray; border-radius: 50px;"
+								type="password"
+								name="confirmPassword"
+								
+							/>
+						</div>
+						
+						<br>
+
+						<div class="d-grid">
+							<button class="btn btn-lg btn-dark" style="border-radius: 50px;" type="submit">
+								Create
+							</button>
+						</div>
+					</form>
+					<% } %> <% if ( hideCreateMessage ){ %>
+					<div class="d-grid">
+						<a href="/login" class="mt-2 btn btn-lg btn-secondary" role="button"
+							>Go to Login</a
+						>
+					</div>
+					<% } %>
 				</div>
 			</div>
 			<!-- end some changes August 18 -->
-			
-			
-			
-			
-			
-
-			
-
-			
-
-			
 		</div>
 		<!-- hide-me -->
 

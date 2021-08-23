@@ -15,12 +15,20 @@
 		<link rel="stylesheet" href="/css/styles.css" />
 
 		<title>Manpower Requisition Form</title>
-		
+
 		<style>
-			
+			.footer {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				background-color: #f8f9fa;
+				color: white;
+				text-align: center;
+				padding-top: 14px;
+			}
 		</style>
 		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-		
 	</head>
 	<body>
 		<!-- Mobile and tablet responsiveness message -->
@@ -55,41 +63,47 @@
 
 			<!-- changes -->
 			<div class="container">
-				
-			
-			<div class="row">
-				<div class="col-md-5">
-					
-				<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_bfn7crmp.json" background="transparent"  speed="1"  style="width: 600px; height: 600px;" loop autoplay></lottie-player>
-					
-				</div>
-				
-				<div class="col-md-6">
-					
-						<!-- <img class="img-fluid" style="width: 300px; height: 300px;" src="/images/HRC-logo.jpg" alt="HRC cover" /> -->
-						
-				
-					
-					
-						<h1 class="mt-5" style="font-size: 100px;">Manpower Requisition Form</h1>
-						
-					
-					<div class="d-flex justify-content-center" onclick="location.href='/login';" style="cursor: pointer;">
-						<button class="mt-4 btn btn-primary" style="background-color: #7851a9; border-color: #7851a9;">Go to Request</button>
+				<div class="row">
+					<div class="col-md-5">
+						<lottie-player
+							src="https://assets10.lottiefiles.com/packages/lf20_bfn7crmp.json"
+							background="transparent"
+							speed="1"
+							style="width: 600px; height: 600px;"
+							loop
+							autoplay
+						></lottie-player>
 					</div>
-					
-					
-					
+
+					<div class="col-md-6">
+						<!-- <img class="img-fluid" style="width: 300px; height: 300px;" src="/images/HRC-logo.jpg" alt="HRC cover" /> -->
+
+						<h1 class="mt-5" style="font-size: 100px;">Manpower Requisition Form</h1>
+
+						<div
+							class="d-flex justify-content-center"
+							
+						>
+							<p class="go-to-request" onclick="location.href='/login';">
+								Go to Request
+								<span class="ms-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+								</span>	
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			</div>	
-			
+
+			<div class="footer">
+				<p class="text-secondary">Designed and built with all the love by the Research and Development team with the help of contributors.</p>
+			</div>
+
 			
 			<!-- end changes -->
 		</div>
 		<!-- hide-me    -->
-		
-		
-		
 	</body>
 </html>
