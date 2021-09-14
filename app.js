@@ -28,7 +28,7 @@ app.use(
 //DATABASE
 
 // production DB
-mongoose.connect('mongodb+srv://Ben:RfEUdkYg$M4B*Q7@mrftestingdb.zjwt5.mongodb.net/mrftestingDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true} );
+mongoose.connect("mongodb+srv://Ben:" + encodeURIComponent("K#'v.K}-#[y-w!Us3;^v4L(nrQFTTM") + "@mrf.0chb5.mongodb.net/MRF?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true} );
 
 
 // local DB
