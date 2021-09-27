@@ -782,7 +782,7 @@ app.post('/requestor-create', function (req, res) {
 			// nodemailer
 			// nodemailer starts here
 			var controlNumber = generateID;
-			var url = 'https://tranquil-atoll-99479.herokuapp.com/bu-id/' + controlNumber;
+			var url = 'https://www.mrf-hijoresources.com/bu-id/' + controlNumber;
 
 			var transporter = nodemailer.createTransport({
 				service: 'gmail',
@@ -1478,9 +1478,9 @@ app.put('/bu-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.buApproval === "Approve"){
-					url = 'https://tranquil-atoll-99479.herokuapp.com/finance-id/' + controlNumber;
+					url = 'https://www.mrf-hijoresources.com/finance-id/' + controlNumber;
 				} else {
-					url = 'https://tranquil-atoll-99479.herokuapp.com/requestor-id/' + controlNumber;
+					url = 'https://www.mrf-hijoresources.com/requestor-id/' + controlNumber;
 				}
 				
 				
@@ -1899,9 +1899,9 @@ app.put('/finance-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.financeApproval === "Approve"){
-					url = 'https://tranquil-atoll-99479.herokuapp.com/hr-id/' + controlNumber;
+					url = 'https://www.mrf-hijoresources.com/hr-id/' + controlNumber;
 				} else {
-					url = 'https://tranquil-atoll-99479.herokuapp.com/';
+					url = 'https://www.mrf-hijoresources.com/';
 				}
 				
 				
@@ -2183,9 +2183,9 @@ app.put('/hr-id/:id', function (req, res) {
 				var url = undefined
 				
 				if (req.body.hrApproval === "Approve"){
-					url = 'https://tranquil-atoll-99479.herokuapp.com/ceo-id/' + controlNumber;
+					url = 'https://www.mrf-hijoresources.com/ceo-id/' + controlNumber;
 				} else {
-					url = 'https://tranquil-atoll-99479.herokuapp.com/';
+					url = 'https://www.mrf-hijoresources.com/';
 				}
 				
 				
@@ -2515,7 +2515,7 @@ app.put('/ceo-id/:id', function (req, res) {
 
 				// nodemailer starts here
 				var controlNumber = paramsUrl;
-				var url = 'https://tranquil-atoll-99479.herokuapp.com/';
+				var url = 'https://www.mrf-hijoresources.com/';
 
 				var transporter = nodemailer.createTransport({
 					service: 'gmail',
